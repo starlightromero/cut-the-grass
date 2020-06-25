@@ -1,34 +1,40 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    HSB, background, color, colorMode, createCanvas, ellipse, height, line, mouseIsPressed,
- *    mouseX, mouseY, rect, stroke, strokeWeight, width
+ *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height,
+ *    noStroke, random, strokeWeight, text, textSize, width
  */
 
-let brushHue, backgroundColor, coinX, coinY, score, time, gameIsOver, hit;
+let drop1x, drop1y, drop1d, drop1FallSpeed;
 
 function setup() {
-  // Canvas & color settings
-  createCanvas(400, 400);
-  colorMode(HSB, 360, 100, 100);
-  brushHue = 0;
-  backgroundColor = 95;
-  coinX = random(width);
-  coinY = random(height);
-  time = 1000;
-  gameIsOver = false;
+  createCanvas(500, 500);
+  colorMode(HSB, 100);
+  // Variables for droplet 1
+  drop1x = 200; // or random(width)
+  drop1y = 0; // or random(height)
+  drop1d = 10; // or random(5,15)
+  drop1FallSpeed = 8; // or random(8, 20)
+
+  // Variables for droplet 2
 }
 
 function draw() {
-  background(backgroundColor);
-  ellipse(coinX, coinY, 20);
-  ellipse(mouseX, mouseY, 20);
-  text(`Time remaining: ${time}`, 20, 40);
-}
+  background(0, 0, 95);
+  //// Code for droplet 1
+  // Move droplet 1
+  drop1y += drop1FallSpeed;
+  // If it goes off the screen...
+  if (drop1y > height) {
+    // ...reset it...
+    drop1y = 0;
+    // ...and move it somewhere random.
+    drop1x = random(width);
+  }
+  // Display droplet 1
+  noStroke();
+  fill(60, 80, 80);
+  ellipse(drop1x, drop1y, drop1d);
 
-function handleCollision() {
-  // We'll write code for what happens if your character hits a coin.
-}
-
-function handleTime() {
-  // We'll write code to handle the time.
+  //// Code for droplet 2
+  // Code your next droplet here
 }

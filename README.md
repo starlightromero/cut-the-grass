@@ -1,4 +1,4 @@
-CSSI Day 6 - Coin Collector
+CSSI Day 8 - Raindrops
 =================
 
 Your Project
