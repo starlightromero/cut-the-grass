@@ -1,4 +1,4 @@
-CSSI Day 3 - Flip the Switch
+CSSI Day 6 - Coin Collector
 =================
 
 Your Project
