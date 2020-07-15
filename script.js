@@ -70,15 +70,17 @@ class RainDrop {
   constructor(diameter) {
     this.x = random(width)
     this.y = 0
-    this.triX1 = this.x
-    this.triY1 = this.y - this.diameter
-    this.triX2 = this.x + this.diameter/2
-    this.triY2 = this.y - this.diameter + 3
-    this.triX3 = this.x + 2
-    this.triY3 = this.y - this.diameter + 3
-    
     this.diameter = diameter
-    this.fallSpeed = 1
+    this.fallSpeed = 0.8 * diameter
+    this.triX1 = this.x - this.diameter/2
+    this.triY1 = this.y
+    this.triX2 = this.x + this.diameter/2
+    this.triY2 = this.y 
+    this.triX3 = this.x
+    this.triY3 = this.y - this.diameter
+    
+    console.log(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)
+    
   }
   
   show() {
@@ -91,6 +93,9 @@ class RainDrop {
   
   drip() {
     this.y += this.fallSpeed
+    this.triY1 += this.fallSpeed
+    this.triY2 += this.fallSpeed
+    this.triY3 += this.fallSpeed
     
     if (this.y > height) {
       this.y = 0
