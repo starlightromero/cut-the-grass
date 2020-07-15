@@ -1,10 +1,10 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height,
- *    noStroke, random, strokeWeight, text, textSize, width, loadSound
+ *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect
  */
 
-let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound
+let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound, rect1, rect2
 
 function setup() {
   createCanvas(500, 500);
@@ -18,7 +18,9 @@ function setup() {
   drop6 = new RainDrop (3)
   drop7 = new RainDrop (6)
   
-  dropSound = loadSound('https://cdn.glitch.com/Water Drop Sound High-SoundBible.com-1387792987.wav')
+  rect1 = new Grass(20)
+  rect2 = new Grass(40)
+  
 }
 
 function draw() {
@@ -42,6 +44,10 @@ function draw() {
   drop5.show()
   drop6.show()
   drop7.show()
+  
+//   display grass
+  rect1.show()
+  rect2.show()
 
 }
 
@@ -68,7 +74,28 @@ class RainDrop {
     if (this.y > height) {
       this.y = 0
       this.x = random(width)
-      dropSound.play()
+      // dropSound.play()
     }
   } 
+}
+
+class Grass {
+  constructor(x) {
+    this.x = x
+    this.y = height
+    this.height = height/5
+    this.width = 3
+  }
+  
+  show() {
+    noStroke() 
+    fill(250, 80, 80)
+    rect(this.x, this.y, this.width, this.height)
+  }
+  
+  grow () {
+    if (this.y < height/2) {
+      this.height += 1
+    }
+  }
 }
