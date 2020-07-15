@@ -80,22 +80,20 @@ class RainDrop {
 }
 
 class Grass {
-  constructor(x) {
-    this.x = x
-    this.y = height
-    this.height = height/5
-    this.width = 3
+  constructor(d) {
+    this.x = 5
+    this.y = 0
+    this.d = d
+    this.growSpeed = random(5, 10)
   }
   
   show() {
     noStroke() 
     fill(250, 80, 80)
-    rect(this.x, this.y, this.width, this.height)
+    rect(10, 500, this.x, this.y)
   }
   
   grow () {
-    if (this.y < height/2) {
-      this.height += 1
-    }
+   this.y -= this.growSpeed
   }
 }
