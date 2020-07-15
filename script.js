@@ -4,7 +4,7 @@
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect
  */
 
-let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound, rect1, rect2
+let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound, blade1, blade2
 
 function setup() {
   createCanvas(500, 500);
@@ -18,8 +18,8 @@ function setup() {
   drop6 = new RainDrop (3)
   drop7 = new RainDrop (6)
   
-  rect1 = new Grass(20)
-  rect2 = new Grass(40)
+  blade1 = new Grass(20)
+  blade2 = new Grass(40)
   
 }
 
@@ -46,26 +46,29 @@ function draw() {
   drop7.show()
   
 //   display grass
-  rect1.show()
-  rect2.show()
+  blade1.show()
+  blade2.show()
+  blade1.grow()
+  blade2.grow()
+  
 
 }
 
 // define Raindrop class 
 
 class RainDrop {
-  constructor(d) {
+  constructor(diameter) {
     this.x = random(width)
     this.y = 0
-    this.d = d
-    this.fallSpeed = 0.8 * d
+    this.diameter = diameter
+    this.fallSpeed = 0.8 * diameter
   }
   
   show() {
     //   Display droplets 
   noStroke()
   fill(60, 80, 80)
-  ellipse(this.x, this.y, this.d)
+  ellipse(this.x, this.y, this.diameter)
   }
   
   drip() {
@@ -75,25 +78,26 @@ class RainDrop {
       this.y = 0
       this.x = random(width)
       // dropSound.play()
+      
     }
   } 
 }
 
 class Grass {
-  constructor(d) {
-    this.x = 5
-    this.y = 0
-    this.d = d
-    this.growSpeed = random(5, 10)
+  constructor() {
+    this.width = 5
+    this.height = 0
+    this.growSpeed = 3
   }
   
   show() {
     noStroke() 
     fill(250, 80, 80)
-    rect(10, 500, this.x, this.y)
+    rect(10, 500, this.width, this.height)
   }
   
   grow () {
-   this.y -= this.growSpeed
+    if (this.height > -200)
+     this.height -= this.growSpeed
   }
 }
