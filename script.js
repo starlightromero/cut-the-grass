@@ -18,7 +18,7 @@ function setup() {
   drop6 = new RainDrop (3)
   drop7 = new RainDrop (6)
   
-  blade1 = new Grass(20)
+  blade1 = new Grass(10)
   blade2 = new Grass(40)
   
 }
@@ -84,7 +84,9 @@ class RainDrop {
 }
 
 class Grass {
-  constructor() {
+  constructor(x, y) {
+    this.x = x
+    this.y = 500
     this.width = 5
     this.height = 0
     this.growSpeed = 3
@@ -93,11 +95,11 @@ class Grass {
   show() {
     noStroke() 
     fill(250, 80, 80)
-    rect(10, 500, this.width, this.height)
+    rect(this.x, this.y, this.width, this.height)
   }
   
   grow () {
-    if (this.height > -200)
+    if (this.height > -500)
      this.height -= this.growSpeed
   }
 }
