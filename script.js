@@ -18,6 +18,10 @@ function setup() {
   drop6 = new RainDrop (3)
   drop7 = new RainDrop (6)
   
+  for(let i=0; i < 20; i++) {
+    console.log(let blade[i] = 0)
+  }
+  
   blade1 = new Grass(10)
   blade2 = new Grass(40)
   blade3 = new Grass(20)
@@ -77,10 +81,7 @@ class RainDrop {
     this.triX2 = this.x + this.diameter/2
     this.triY2 = this.y 
     this.triX3 = this.x
-    this.triY3 = this.y - this.diameter
-    
-    console.log(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)
-    
+    this.triY3 = this.y - this.diameter  
   }
   
   show() {
@@ -100,6 +101,12 @@ class RainDrop {
     if (this.y > height) {
       this.y = 0
       this.x = random(width)
+      this.triX1 = this.x - this.diameter/2
+      this.triY1 = this.y
+      this.triX2 = this.x + this.diameter/2
+      this.triY2 = this.y 
+      this.triX3 = this.x
+      this.triY3 = this.y - this.diameter  
       // dropSound.play()
       blade1.grow()
       blade2.grow()
