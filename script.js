@@ -84,9 +84,10 @@ class RainDrop {
 }
 
 class Grass {
-  constructor(x, y) {
+  constructor(x, y, triX1, triX2, triX3) {
     this.x = x
     this.y = 500
+    this.triX1 = triX1
     this.width = 5
     this.height = 0
     this.growSpeed = 3
@@ -95,11 +96,12 @@ class Grass {
   show() {
     noStroke() 
     fill(250, 80, 80)
+    
     rect(this.x, this.y, this.width, this.height)
   }
   
   grow () {
-    if (this.height > -500)
+    if (this.height > -300)
      this.height -= this.growSpeed
   }
 }
