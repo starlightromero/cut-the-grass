@@ -48,8 +48,8 @@ function draw() {
 //   display grass
   blade1.show()
   blade2.show()
-  blade1.grow()
-  blade2.grow()
+  
+ 
   
 
 }
@@ -78,16 +78,17 @@ class RainDrop {
       this.y = 0
       this.x = random(width)
       // dropSound.play()
+      blade1.grow()
+      blade2.grow()
       
     }
   } 
 }
 
 class Grass {
-  constructor(x, y, triX1, triX2, triX3) {
+  constructor(x, y) {
     this.x = x
     this.y = 500
-    this.triX1 = triX1
     this.width = 5
     this.height = 0
     this.growSpeed = 3
