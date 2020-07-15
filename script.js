@@ -86,19 +86,19 @@ class RainDrop {
 }
 
 class Grass {
-  constructor(x, y, tri1x, tri1y, tri2x, tri2y, tri3x, tri3y) {
+  constructor(x, y) {
     this.x = x
     this.y = 500
     this.width = 5
     this.height = 0
     this.growSpeed = 3
 //     triangle coordinates to sit atop rectangle
-    this.tri1x = this.x
-    this.tri1y = this.y
-    this.tri2x = this.x + this.width
-    this.tri2y = this.y + this.width
-    this.tri3x = this.x + 5
-    this.tri3y = this.y + 5
+    this.tri1x = this.x 
+    this.tri1y = this.y - this.height
+    this.tri2x = this.x + 5
+    this.tri2y = this.y - this.height
+    this.tri3x = this.x 
+    this.tri3y = this.y - this.height/2
     
   }
   
@@ -112,5 +112,6 @@ class Grass {
   grow () {
     if (this.height > -300)
      this.height -= this.growSpeed
+     
   }
 }
