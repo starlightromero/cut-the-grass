@@ -1,14 +1,14 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height,
- *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect
+ *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle
  */
 
 let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound, blade1, blade2
 
 function setup() {
   createCanvas(500, 500);
-  colorMode(HSB, 100);
+  colorMode(HSB, 100, 100);
   // Variables for droplet 1
   drop1 = new RainDrop(12)
   drop2 = new RainDrop(15)
@@ -67,7 +67,7 @@ class RainDrop {
   show() {
     //   Display droplets 
   noStroke()
-  fill(60, 80, 80)
+  fill(179, 79, 80)
   ellipse(this.x, this.y, this.diameter)
   }
   
@@ -86,19 +86,27 @@ class RainDrop {
 }
 
 class Grass {
-  constructor(x, y) {
+  constructor(x, y, tri1x, tri1y, tri2x, tri2y, tri3x, tri3y) {
     this.x = x
     this.y = 500
     this.width = 5
     this.height = 0
     this.growSpeed = 3
+//     triangle coordinates to sit atop rectangle
+    this.tri1x = this.x
+    this.tri1y = this.y
+    this.tri2x = this.x + this.width
+    this.tri2y = this.y + this.width
+    this.tri3x = this.x + 5
+    this.tri3y = this.y + 5
+    
   }
   
   show() {
     noStroke() 
-    fill(250, 80, 80)
-    
+    fill(131, 79, 80)
     rect(this.x, this.y, this.width, this.height)
+    triangle(this.tri1x, this.tri1y, this.tri2x, this.tri2y, this.tri3x, this.tri3y)
   }
   
   grow () {
