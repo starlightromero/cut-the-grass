@@ -4,7 +4,8 @@
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle
  */
 
-let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound, blade1, blade2, blade3, blade4, blade5, blade6, blade7
+let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound
+let blades = []
 
 function setup() {
   createCanvas(500, 500);
@@ -18,17 +19,9 @@ function setup() {
   drop6 = new RainDrop (3)
   drop7 = new RainDrop (6)
   
-  for(let i=0; i < 20; i++) {
-    console.log(let blade[i] = 0)
+  for(let i = 0; i < 5; i++) {
+    blades[i] = new Grass(random(width))
   }
-  
-  blade1 = new Grass(10)
-  blade2 = new Grass(40)
-  blade3 = new Grass(20)
-  blade4 = new Grass(50)
-  blade5 = new Grass(65)
-  blade6 = new Grass(80)
-  blade7 = new Grass(100)
   
 }
 
@@ -55,17 +48,9 @@ function draw() {
   drop7.show()
   
 //   display grass
-  blade1.show()
-  blade2.show()
-  blade3.show()
-  blade4.show()
-  blade5.show()
-  blade6.show()
-  blade7.show()
-  
- 
-  
-
+  for (const blade of blades) {
+    blade.show()
+  }
 }
 
 // define Raindrop class 
@@ -108,13 +93,9 @@ class RainDrop {
       this.triX3 = this.x
       this.triY3 = this.y - this.diameter  
       // dropSound.play()
-      blade1.grow()
-      blade2.grow()
-      blade3.grow()
-      blade4.grow()
-      blade5.grow()
-      blade6.grow()
-      blade7.grow()
+      for (const blade of blades) {
+        blade.grow()
+      }
       
     }
   } 
