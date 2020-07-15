@@ -4,7 +4,7 @@
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle
  */
 
-let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound, blade1, blade2
+let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound, blade1, blade2, blade3, blade4, blade5, blade6, blade7
 
 function setup() {
   createCanvas(500, 500);
@@ -20,6 +20,11 @@ function setup() {
   
   blade1 = new Grass(10)
   blade2 = new Grass(40)
+  blade3 = new Grass(20)
+  blade4 = new Grass(50)
+  blade5 = new Grass(65)
+  blade6 = new Grass(80)
+  blade7 = new Grass(100)
   
 }
 
@@ -48,6 +53,11 @@ function draw() {
 //   display grass
   blade1.show()
   blade2.show()
+  blade3.show()
+  blade4.show()
+  blade5.show()
+  blade6.show()
+  blade7.show()
   
  
   
@@ -80,6 +90,11 @@ class RainDrop {
       // dropSound.play()
       blade1.grow()
       blade2.grow()
+      blade3.grow()
+      blade4.grow()
+      blade5.grow()
+      blade6.grow()
+      blade7.grow()
       
     }
   } 
@@ -98,7 +113,7 @@ class Grass {
     this.tri2x = this.x + 5
     this.tri2y = this.y - this.height
     this.tri3x = this.x 
-    this.tri3y = this.y - this.height/2
+    this.tri3y = this.y - 5
     
   }
   
@@ -111,7 +126,9 @@ class Grass {
   
   grow () {
     if (this.height > -300)
-     this.height -= this.growSpeed
-     
+      this.height -= this.growSpeed
+      this.tri1y -= this.growSpeed
+      this.tri2y -= this.growSpeed
+      this.tri3y -= this.growSpeed
   }
 }
