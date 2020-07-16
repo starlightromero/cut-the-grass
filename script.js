@@ -44,7 +44,7 @@ function draw() {
   function maxLength(blade) {
     return blade.growing === false
   }
-    
+  
   if (blades.every(maxLength)) {
     background(200, 19, 100)
     sun.show()
@@ -58,6 +58,7 @@ function draw() {
     // lawnMower.show()
   } else {
     background(0, 0, 80)
+    lawnMower.show()
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
@@ -74,13 +75,13 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW && lawnMower.x > 0 + lawnMower.width) {
-    lawnMower.x -= 30
+    lawnMower.left(30)
   } else if (keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
-    lawnMower.x += 30
+    lawnMower.right(30)
   } else if (keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height) {
-    lawnMower.y += 30
+    lawnMower.down(30)
   } else if (keyCode === UP_ARROW && lawnMower.y > 0 + lawnMower.height) {
-    lawnMower.y -= 30
+    lawnMower.up(30)
   }
   
   for (const blade of blades) {
@@ -129,7 +130,7 @@ class Cloud {
 class RainDrop {
   constructor(diameter) {
     console.log(this.x)
-    this.x = 
+    this.x = random()
     console.log(this.y)
     this.y = random(30, 200)
     this.diameter = diameter
@@ -238,11 +239,34 @@ class Mower {
   constructor() {
     this.x = 0
     this.y = 0
-    this.width = 20
-    this.height = 20
+    this.width = 90
+    this.height = 90
+    this.img = mowerRight
   }
   
   show() {
-    image(mowerRight, 0, 0)
+    image(this.img, this.x, this.y, this.width, this.height)
+  }
+  
+  right(x) {
+    this.x += x
+    this.img = mowerRight
+    this.show()
+  }
+  
+  left(x) {
+    this.x -= x
+    this.img = mowerLeft
+    this.show()
+  }
+  
+  down(y) {
+    this.y += y
+    this.show()
+  }
+  
+  up(y) {
+    this.y -= y
+    this.show()
   }
 }
