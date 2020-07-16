@@ -58,8 +58,9 @@ function keyPressed() {
   }
   
   for (const blade of blades) {
+    console.log("blade " + blade.height)
+    console.log("mower " + lawnMower.x)
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height) || collidePointRect(blade.triX, blade.triY3, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height)
-    console.log(cutGrass)
     if (cutGrass) {
       blade.height += lawnMower.mowerHeight
     }
@@ -70,34 +71,34 @@ function keyPressed() {
 
 class RainDrop {
   constructor(diameter) {
-    this.dropX = random(width)
-    this.dropY = 0
+    this.x = random(width)
+    this.y = 0
     this.diameter = diameter
-    this.fallSpeed = 0.8 * diameter
+    this.fallSpeed = 0.8 
     this.triX1 = this.x - this.diameter/2
     this.triY1 = this.y
     this.triX2 = this.x + this.diameter/2
     this.triY2 = this.y 
     this.triX3 = this.x
-    this.triY3 = this.y - this.diameter  
+    this.triY3 = this.y - this.diameter
   }
   
   show() {
     //   Display droplets 
     noStroke()
     fill(179, 79, 80)
-    ellipse(this.dropX, this.dropY, this.diameter)
+    ellipse(this.x, this.y, this.diameter)
     triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)
   }
   
   drip() {
-    this.dropY += this.fallSpeed
+    this.y += this.fallSpeed
     this.triY1 += this.fallSpeed
     this.triY2 += this.fallSpeed
     this.triY3 += this.fallSpeed
     
     for (const blade of blades) {
-      let hit = collidePointCircle(blade.x, blade.y, this.dropX, this.dropY, this.diameter)
+      let hit = collidePointCircle(blade.x, blade.y, this.x, this.y, this.diameter)
       if (hit) {
         blade.grow(this.diameter)
       }
