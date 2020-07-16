@@ -13,7 +13,7 @@ function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 100, 100);
   // Variables for droplet 1
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 100; i++) {
     drops[i] = new RainDrop(random(3, 18))
   }
   
@@ -30,13 +30,15 @@ function draw() {
   for (const drop of drops) {
     drop.drip()
     drop.show()
+  }
 
   for (const blade of blades) {
     blade.show()
   }
     
   function maxLength(blade) {
-    blade.length ===
+    blade.height < -299
+    console.log(blade.height)
   }
     
   console.log(blades.every(maxLength))
@@ -57,7 +59,7 @@ function keyPressed() {
   
   for (const blade of blades) {
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height)
-    console.log(cutGrass)
+    // console.log(cutGrass)
     // let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height) || collidePointRect(blade.triX, blade.triY3, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height)
     // if (cutGrass) {
     //   blade.height += lawnMower.mowerHeight
