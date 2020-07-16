@@ -2,7 +2,7 @@
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, map
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
- *    loadImage, image
+ *    loadImage, image, loadFont, textAlign, CENTER
  */
 
 let dropSound
@@ -15,12 +15,17 @@ let mowerRight
 let sun
 let dirt
 let raining
-
+let titleFont
+let textFont
+let title
+let text
 
 
 function preload() {
   mowerLeft = loadImage('https://cdn.glitch.com/f4d46d84-c571-4140-b60d-740161a7e037%2Fmower-left.png?v=1594916808200')
   mowerRight = loadImage('https://cdn.glitch.com/f4d46d84-c571-4140-b60d-740161a7e037%2Fmower-right.png?v=1594916817885')
+  titleFont = loadFont('https://cdn.glitch.com/f4d46d84-c571-4140-b60d-740161a7e037%2FWedgie%20Regular.ttf?v=1594941996311')
+  textFont = loadFont('https://cdn.glitch.com/f4d46d84-c571-4140-b60d-740161a7e037%2FTypo_Round_Regular_Demo.otf?v=1594942077138')
 }
 
 function setup() {
@@ -45,11 +50,20 @@ function setup() {
   
   raining = true
   
+  textFont(titleFont)
+  textSize(width/3)
+  textAlign(CENTER, CENTER)
+  
+  title = "It's raining!"
+  
+  text = "..."
+  
 }
 
 function draw() {
   if (raining) {
     background(0, 0, 80)
+    text(title, width/2, 10)
     dirt.show()
     for (const cloud of clouds) {
       cloud.show()
@@ -140,7 +154,7 @@ class Cloud {
 class RainDrop {
   constructor() {
     // console.log(this.x)
-    this.x = random(width)
+    this.x = random(clouds.map())
     // this.x = random(50, 450)
     // console.log(this.y)
     this.y = random(30, 200)
