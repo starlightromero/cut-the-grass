@@ -30,15 +30,20 @@ function draw() {
   }
     
   if (blades.every(maxLength)) {
-    background(200, 71, 73)
-    for (const blade of blades) {
-      blade.show()
-    }
-    lawnMower.show()
-  } else {
     background(200, 11, 100)
     for (const drop of drops) {
       drop.drip()
+      drop.show()
+    }
+    for (const blade of blades) {
+      blade.show()
+    }
+    // lawnMower.show()
+  } else {
+    background(60, 0, 100)
+    for (const drop of drops) {
+      drop.rain
+      ()
       drop.show()
     }
     for (const blade of blades) {
@@ -104,7 +109,9 @@ class RainDrop {
         blade.grow(this.diameter)
       }
     }
+  }
     
+  reset() {
     if (this.y > height) {
       this.y = 0
       this.x = random(width)
@@ -115,7 +122,12 @@ class RainDrop {
       this.triX3 = this.x
       this.triY3 = this.y - this.diameter  
     }
-  } 
+  }
+  
+  rain() {
+    this.drip()
+    this.reset()
+  }
 }
 
 class Grass {
@@ -152,6 +164,21 @@ class Grass {
     } else {
       this.growing = false
     }
+  }
+}
+
+class Sun {
+  constructor() {
+    this.x = 300
+    this.y = 50
+    this.diameter = 100
+  }
+  
+  show() {
+    noStroke()
+    fill(179, 79, 80)
+    ellipse(this.x, this.y, this.diameter)
+    
   }
 }
 
