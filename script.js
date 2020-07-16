@@ -7,7 +7,7 @@
 let dropSound
 let blades = []
 let drops = []
-let lawnMower
+// let lawnMower
 
 function setup() {
   createCanvas(500, 500);
@@ -21,7 +21,7 @@ function setup() {
     blades[i] = new Grass(random(width))
   }
   
-  lawnMower = new Mow
+  // lawnMower = new Mow
 }
 
 function draw() {
@@ -43,29 +43,29 @@ function draw() {
     blade.show()
   }
   
-  lawnMower.showMower()
+  // lawnMower.showMower()
 }
 
-function keyPressed() {
-  if (keyCode === LEFT_ARROW && lawnMower.x > 0 + lawnMower.width) {
-    lawnMower.x -= 40
-  } else if (keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
-    lawnMower.x += 40
-  } else if (keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height) {
-    lawnMower.y += 40
-  } else if (keyCode === UP_ARROW && lawnMower.y > 0 + lawnMower.height) {
-    lawnMower.y -= 40
-  }
+// function keyPressed() {
+//   if (keyCode === LEFT_ARROW && lawnMower.x > 0 + lawnMower.width) {
+//     lawnMower.x -= 40
+//   } else if (keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
+//     lawnMower.x += 40
+//   } else if (keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height) {
+//     lawnMower.y += 40
+//   } else if (keyCode === UP_ARROW && lawnMower.y > 0 + lawnMower.height) {
+//     lawnMower.y -= 40
+//   }
   
-  for (const blade of blades) {
-    console.log("blade " + blade.height)
-    console.log("mower " + lawnMower.x)
-    let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height) || collidePointRect(blade.triX, blade.triY3, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height)
-    if (cutGrass) {
-      blade.height += lawnMower.mowerHeight
-    }
-  }  
-}
+//   for (const blade of blades) {
+//     console.log("blade " + blade.height)
+//     console.log("mower " + lawnMower.x)
+//     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height) || collidePointRect(blade.triX, blade.triY3, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height)
+//     if (cutGrass) {
+//       blade.height += lawnMower.mowerHeight
+//     }
+//   }  
+// }
 
 // define Raindrop class 
 
@@ -74,7 +74,7 @@ class RainDrop {
     this.x = random(width)
     this.y = 0
     this.diameter = diameter
-    this.fallSpeed = 0.8 
+    this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
     this.triY1 = this.y
     this.triX2 = this.x + this.diameter/2
@@ -104,9 +104,9 @@ class RainDrop {
       }
     }
     
-    if (this.dropY > height) {
-      this.dropY = 0
-      this.dropX = random(width)
+    if (this.y > height) {
+      this.y = 0
+      this.x = random(width)
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
@@ -151,16 +151,16 @@ class Grass {
   }
 }
 
-class Mow {
-  constructor() {
-    this.x = 0
-    this.y = 0
-    this.width = 20
-    this.height = 20
-  }
+// class Mow {
+//   constructor() {
+//     this.x = 0
+//     this.y = 0
+//     this.width = 20
+//     this.height = 20
+//   }
   
-  showMower () {
-    fill(0)
-    rect(this.x, this.y, this.width, this.height)
-  }
-}
+//   showMower () {
+//     fill(0)
+//     rect(this.x, this.y, this.width, this.height)
+//   }
+// }
