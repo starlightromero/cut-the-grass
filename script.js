@@ -11,6 +11,10 @@ let lawnMower
 let sun
 let clouds = []
 
+ for(let i = 0; i < 4; i++) {
+    clouds[i] = new Cloud
+  }
+
 function preload() {
   
 }
@@ -30,9 +34,6 @@ function setup() {
   lawnMower = new Mower
   sun = new Sun
   
-  for(let i = 0; i < 4; i++) {
-    clouds[i] = new Cloud
-  }
 }
 
 function draw() {
@@ -93,7 +94,7 @@ function keyPressed() {
 class RainDrop {
   constructor(diameter) {
     this.x = random(width)
-    this.y = random(30, 200)
+    this.y = random()
     this.diameter = diameter
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
@@ -128,7 +129,7 @@ class RainDrop {
   reset() {
     if (this.y > height) {
       this.x = random(width)
-      this.y = random(30, 200)
+      this.y = random(clouds)
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
