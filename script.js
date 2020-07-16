@@ -48,30 +48,8 @@ function setup() {
 }
 
 function draw() {
-  function maxLength(blade) {
-    return blade.height > 300
-  }
   
-  function cutLength(blade) {
-    return blade.height = dirt.height
-  }
-  
-  console.log(blades[0].height)
-  
-  if (blades.every(maxLength)) {
-    background(200, 19, 100)
-    sun.show()
-    raining = false
-    dirt.show()
-    lawnMower.show()
-    for (const drop of drops) {
-      drop.drip()
-      drop.show()
-    }
-    for (const blade of blades) {
-      blade.show()
-    }
-  } else if (raining) {
+  if (raining) {
     background(0, 0, 80)
     dirt.show()
     for (const cloud of clouds) {
@@ -80,6 +58,18 @@ function draw() {
     }
     for (const drop of drops) {
       drop.rain()
+      drop.show()
+    }
+    for (const blade of blades) {
+      blade.show()
+    }
+  } else {
+    background(200, 19, 100)
+    sun.show()
+    dirt.show()
+    lawnMower.show()
+    for (const drop of drops) {
+      drop.drip()
       drop.show()
     }
     for (const blade of blades) {
@@ -104,6 +94,12 @@ function keyPressed() {
     if (cutGrass && blade.height > dirt.height) {
       lawnMower.cut(blade)
     }
+    
+    function allCut(blade) {
+      return blade.height <= dirt.height
+    }
+    
+    blades.every(allCut) ? raining : !raining
   }  
 }
 
@@ -208,7 +204,7 @@ class Dirt {
   
   show() {
     noStroke()
-    if (drop.raining) {
+    if (raining) {
       fill('rgb(139,69,19)')
     } else {
       fill('rgb(210,180,140)')
@@ -249,7 +245,7 @@ class Grass {
       this.tri2y -= growSpeed
       this.tri3y -= growSpeed
     } else {
-      drop.raining = false
+      raining = false
     }
   }
 }
