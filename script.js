@@ -4,22 +4,19 @@
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle
  */
 
-let drop1, drop2, drop3, drop4, drop5, drop6, drop7, dropSound
+let dropSound
 let blades = []
+let drops = []
 
 function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 100, 100);
   // Variables for droplet 1
-  drop1 = new RainDrop(12)
-  drop2 = new RainDrop(15)
-  drop3 = new RainDrop(8)
-  drop4 = new RainDrop (4)
-  drop5 = new RainDrop (10)
-  drop6 = new RainDrop (3)
-  drop7 = new RainDrop (6)
+  for (let i = 0; i < 8; i++) {
+    drops[i] = new RainDrop(random(3, 18))
+  }
   
-  for(let i = 0; i < 5; i++) {
+  for(let i = 0; i < 45; i++) {
     blades[i] = new Grass(random(width))
   }
   
@@ -30,22 +27,14 @@ function draw() {
 
   // Move droplets
 
-  drop1.drip()
-  drop2.drip()
-  drop3.drip()
-  drop4.drip()
-  drop5.drip()
-  drop6.drip()
-  drop7.drip()
+  for (const drop of drops) {
+    drop.drip()
+  }
  
 //   display droplets
-  drop1.show()
-  drop2.show()
-  drop3.show()
-  drop4.show()
-  drop5.show()
-  drop6.show()
-  drop7.show()
+  for (const drop of drops) {
+    drop.show()
+  }
   
 //   display grass
   for (const blade of blades) {
@@ -94,6 +83,7 @@ class RainDrop {
       this.triY3 = this.y - this.diameter  
       // dropSound.play()
       for (const blade of blades) {
+        let hit = collideRectCircle(x1, y1, width1, height1, cx, cy, diameter)
         blade.grow()
       }
       
@@ -107,7 +97,7 @@ class Grass {
     this.y = 500
     this.width = 5
     this.height = 0
-    this.growSpeed = 3
+    this.growSpeed = 1.2 * this.width
 //     triangle coordinates to sit atop rectangle
     this.tri1x = this.x 
     this.tri1y = this.y - this.height
@@ -126,10 +116,15 @@ class Grass {
   }
   
   grow () {
-    if (this.height > -300)
+    if (this.height > -300) {
       this.height -= this.growSpeed
       this.tri1y -= this.growSpeed
       this.tri2y -= this.growSpeed
       this.tri3y -= this.growSpeed
+    }
+  }
+  
+  mowLawn () {
+    if ()
   }
 }
