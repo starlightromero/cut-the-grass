@@ -27,11 +27,11 @@ function setup() {
   colorMode(HSB, 100, 100);
   // Variables for droplet 1
   for (let i = 0; i < 50; i++) {
-    drops[i] = new RainDrop(random(3, 18))
+    drops[i] = new RainDrop()
   }
   
   for(let i = 0; i < 45; i++) {
-    blades[i] = new Grass(random(width))
+    blades[i] = new Grass()
   }
   
   lawnMower = new Mower
@@ -52,7 +52,8 @@ function draw() {
     background(200, 19, 100)
     sun.show()
     dirt.raining = false
-    dirt.show()
+    dirt.show
+    lawnMower.show()
     for (const drop of drops) {
       drop.drip()
       drop.show()
@@ -60,11 +61,10 @@ function draw() {
     for (const blade of blades) {
       blade.show()
     }
-    // lawnMower.show()
   } else {
     background(0, 0, 80)
-    lawnMower.show()
     dirt.show()
+    lawnMower.show()
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
@@ -92,11 +92,9 @@ function keyPressed() {
   
   for (const blade of blades) {
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height)
-    // console.log(cutGrass)
-    console.log(blade.y, blade.height)
     if (cutGrass && blade.height > dirt.height) {
-      blade.height += lawnMower.height
-      console.log(blade.height)
+      blade.height -= lawnMower.height
+      blade.y
     }
   }  
 }
@@ -135,13 +133,13 @@ class Cloud {
 // define Raindrop class 
 
 class RainDrop {
-  constructor(diameter) {
+  constructor() {
     // console.log(this.x)
     this.x = random(width)
     // this.x = random(50, 450)
     // console.log(this.y)
     this.y = random(30, 200)
-    this.diameter = diameter
+    this.diameter = random(3, 18)
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
     this.triY1 = this.y
@@ -213,8 +211,8 @@ class Dirt {
 }
 
 class Grass {
-  constructor(x) {
-    this.x = x
+  constructor() {
+    this.x = random(width)
     this.y = 500
     this.width = 3
     this.height = 0
@@ -237,9 +235,10 @@ class Grass {
   }
   
   grow(dropSize) {
-    if (this.height > -300) {
+    if (this.height < 300) {
       let growSpeed = dropSize/2
-      this.height -= growSpeed
+      this.y -= growSpeed
+      this.height += growSpeed
       this.tri1y -= growSpeed
       this.tri2y -= growSpeed
       this.tri3y -= growSpeed
