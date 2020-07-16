@@ -11,6 +11,10 @@ let lawnMower
 let sun
 let clouds = []
 
+function preload() {
+  
+}
+
 function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 100, 100);
@@ -27,10 +31,7 @@ function setup() {
   sun = new Sun
   
   for(let i = 0; i < 4; i++) {
-    let x = random(50, 450)
-    let y = random(30, 200)
-    let d = random(5, 50)
-    clouds[i] = new Cloud(x, y, d)
+    clouds[i] = new Cloud
   }
 }
 
@@ -87,16 +88,12 @@ function keyPressed() {
   }  
 }
 
-// define Raindrop class
-
-
+// define Raindrop class 
 
 class RainDrop {
   constructor(diameter) {
-    this.x = random(clouds.map(function (cloud) {
-      cloud.left
-    }))
-    this.y = 0
+    this.x = random(width)
+    this.y = random(30, 200)
     this.diameter = diameter
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
@@ -111,8 +108,7 @@ class RainDrop {
     //   Display droplets 
     noStroke()
     fill(179, 79, 80)
-    ellipse(this.x, this.y, this.diameter)
-    triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)
+    let dropShape = ellipse(this.x, this.y, this.diameter) && triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)  
   }
   
   drip() {
@@ -131,8 +127,8 @@ class RainDrop {
     
   reset() {
     if (this.y > height) {
-      this.y = 0
       this.x = random(width)
+      this.y = random(30, 200)
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
@@ -186,12 +182,11 @@ class Grass {
 }
 
 class Cloud {
-  constructor(x, y, d) {
-    this.x = x
-    this.y = y
-    this.diameter = d
-    this.left = this.x - this.diameter/4*5 - this.diameter
-    this.right = this.x + this.diameter/4*5 + this.diameter
+  constructor() {
+    this.x = random(50, 450)
+    this.y = random(30, 200)
+    this.diameter = random(5, 50)
+    this.speed = this.diameter * 0.01
   }
   
   show() {
@@ -209,8 +204,8 @@ class Cloud {
   }
   
   move() {
-    if (this.left < width) {
-      this.x += 0.3
+    if (this.x - (this.diameter/4*5 - this.diameter) < width) {
+      this.x += this.speed
     } else {
       this.x = 0 - this.diameter/4*5 - this.diameter
     }
