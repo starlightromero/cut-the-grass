@@ -49,6 +49,15 @@ function setup() {
 
 function draw() {
   
+  function maxHeight(blade) {
+    return blade.height > 300
+  }
+  
+  
+  if (blades.every(maxHeight)) {
+    raining === false
+  }
+  
   if (raining) {
     background(0, 0, 80)
     dirt.show()
@@ -67,6 +76,7 @@ function draw() {
     background(200, 19, 100)
     sun.show()
     dirt.show()
+    lawnMower.reset()
     lawnMower.show()
     for (const drop of drops) {
       drop.drip()
@@ -79,13 +89,13 @@ function draw() {
 }
 
 function keyPressed() {
-  if (keyCode === LEFT_ARROW && lawnMower.x > 0) {
+  if (raining === false && keyCode === LEFT_ARROW && lawnMower.x > 0) {
     lawnMower.left(20)
-  } else if (keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
+  } else if (raining === false && keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
     lawnMower.right(20)
-  } else if (keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height - dirt.height) {
+  } else if (raining === false && keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height - dirt.height) {
     lawnMower.down(20)
-  } else if (keyCode === UP_ARROW && lawnMower.y > 0) {
+  } else if (raining === false && keyCode === UP_ARROW && lawnMower.y > 0) {
     lawnMower.up(20)
   }
   
@@ -96,10 +106,12 @@ function keyPressed() {
     }
     
     function allCut(blade) {
-      return blade.height <= dirt.height
+      return blade.height === dirt.height
     }
     
-    blades.every(allCut) ? raining : !raining
+    if (blades.every(allCut)) {
+      raining = true
+    }
   }  
 }
 
@@ -271,6 +283,12 @@ class Mower {
     this.y = 0
     this.width = 90
     this.height = 90
+    this.img = mowerRight
+  }
+  
+  reset() {
+    this.x = 0
+    this.y = 0
     this.img = mowerRight
   }
   
