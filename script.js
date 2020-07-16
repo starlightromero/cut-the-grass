@@ -10,10 +10,12 @@ let drops = []
 let lawnMower
 let sun
 let clouds = []
+let mowerLeft
+let mowerRight
 
 
 function preload() {
-  
+  mowerLeft = loadImage('assets/mower-left.png')
 }
 
 function setup() {
@@ -125,9 +127,9 @@ class Cloud {
 
 class RainDrop {
   constructor(diameter) {
-    this.x = random(width)
+    this.x = random(50, 450)
     console.log(this.y)
-    this.y = random(Cloud.diameter)
+    this.y = random(30, 200)
     this.diameter = diameter
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
@@ -161,8 +163,8 @@ class RainDrop {
     
   reset() {
     if (this.y > height) {
-      this.x = random(width)
-      this.y = random(Cloud.y)
+      this.x = random(50, 450)
+      this.y = random(30, 200)
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
