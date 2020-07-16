@@ -52,7 +52,7 @@ function draw() {
     background(200, 19, 100)
     sun.show()
     dirt.raining = false
-    dirt.show
+    dirt.show()
     lawnMower.show()
     for (const drop of drops) {
       drop.drip()
@@ -64,7 +64,6 @@ function draw() {
   } else {
     background(0, 0, 80)
     dirt.show()
-    lawnMower.show()
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
@@ -217,12 +216,12 @@ class Grass {
     this.height = 0
     this.growing = true
 //     triangle coordinates to sit atop rectangle
-    this.tri1x = this.x 
-    this.tri1y = this.y - this.height
+    this.tri1x = this.x
+    this.tri1y = this.y
     this.tri2x = this.x + this.width
-    this.tri2y = this.y - this.height
+    this.tri2y = this.y
     this.tri3x = this.x 
-    this.tri3y = this.y - this.width
+    this.tri3y = this.y - this.width*2
     
   }
   
@@ -299,8 +298,8 @@ class Mower {
   
   cut(blade) {
     blade.y = lawnMower.y + lawnMower.height - 10
-    blade.tri1x
-    balde.tri2y
-    
+    blade.tri1y = blade.y
+    blade.tri2y = blade.y
+    blade.tri3y = blade.y - blade.width
   }
 }
