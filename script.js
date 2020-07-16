@@ -167,19 +167,10 @@ class RainDrop {
     this.triY2 += this.fallSpeed
     this.triY3 += this.fallSpeed
     
-    function maxHeight(blade) {
-      return blade.height > 300
-    }
-    
-    if (blades.every(maxHeight)) {
-      raining = false
-      lawnMower.reset()
-    } else {
-      for (const blade of blades) {
-        let hit = collidePointCircle(blade.x, blade.y, this.x, this.y, this.diameter)
-        if (hit) {
-          blade.grow(this.diameter)
-        }
+    for (const blade of blades) {
+      let hit = collidePointCircle(blade.x, blade.y, this.x, this.y, this.diameter)
+      if (hit) {
+        blade.grow(this.diameter)
       }
     }
   }
@@ -199,8 +190,17 @@ class RainDrop {
   }
   
   rain() {
-    this.drip()
-    this.reset()
+    function maxHeight(blade) {
+      return blade.height > 300
+    }
+    
+    if (blades.every(maxHeight)) {
+      raining = false
+      lawnMower.reset()
+    } else {
+      this.drip()
+      this.reset()
+    }
   }
 }
 
@@ -227,7 +227,7 @@ class Grass {
   constructor() {
     this.x = random(width)
     this.y = 500
-    this.width = 3
+    this.width = 8
     this.height = 0
 //     triangle coordinates to sit atop rectangle
     this.tri1x = this.x
