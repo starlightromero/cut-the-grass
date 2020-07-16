@@ -72,6 +72,13 @@ class RainDrop {
     this.triY2 += this.fallSpeed
     this.triY3 += this.fallSpeed
     
+    for (const blade of blades) {
+      let hit = collidePointCircle(blade.x, blade.y, this.dropX, this.dropY, this.diameter)
+      if (hit) {
+        blade.grow()
+      }
+    }
+    
     if (this.dropY > height) {
       this.dropY = 0
       this.dropX = random(width)
@@ -81,16 +88,6 @@ class RainDrop {
       this.triY2 = this.y 
       this.triX3 = this.x
       this.triY3 = this.y - this.diameter  
-      // dropSound.play()
-      e.log(blades[0].x)
-        i++
-      }
-      for (const blade of blades) {
-        
-        console.log(collidePointCircle(blade.x, blade.y, this.dropX, this.dropY, this.diameter))
-        
-  
-      }
     }
   } 
 }
@@ -128,7 +125,7 @@ class Grass {
     }
   }
   
-  // mowLawn () {
-  //   if ()
-  // }
+  mowLawn() {
+    
+  }
 }
