@@ -58,8 +58,8 @@ function keyPressed() {
   }
   
   for (const blade of blades) {
-    console.log(collideRectRect(blade.x, blade.y, blade.width, blade.height, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height) )
-    let cutGrass = collideRectRect(blade.x, blade.y, blade.width, blade.height, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height) 
+    let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height) || collidePointRect(blade.triX, blade.triY3, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height)
+    console.log(cutGrass)
     if (cutGrass) {
       blade.height += lawnMower.mowerHeight
     }
