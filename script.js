@@ -50,9 +50,9 @@ function setup() {
   
   raining = true
   
-  textFont(titleFont)
-  textSize(width/3)
-  textAlign(CENTER, CENTER)
+  // textFont(titleFont)
+  // textSize(width/3)
+  // textAlign(CENTER, CENTER)
   
   title = "It's raining!"
   
@@ -63,7 +63,7 @@ function setup() {
 function draw() {
   if (raining) {
     background(0, 0, 80)
-    text(title, width/2, 10)
+    // text(title, width/2, 10)
     dirt.show()
     for (const cloud of clouds) {
       cloud.show()
@@ -154,7 +154,9 @@ class Cloud {
 class RainDrop {
   constructor() {
     // console.log(this.x)
-    this.x = random(clouds.map())
+    this.x = random(clouds.map(function (this.diameter) {
+      
+    }))
     // this.x = random(50, 450)
     // console.log(this.y)
     this.y = random(30, 200)
