@@ -14,6 +14,7 @@ let mowerLeft
 let mowerRight
 let sun
 let dirt
+let raining
 
 
 
@@ -41,6 +42,9 @@ function setup() {
   for(let i = 0; i < 4; i++) {
     clouds[i] = new Cloud
   }
+  
+  raining = true
+  
 }
 
 function draw() {
@@ -48,12 +52,16 @@ function draw() {
     return blade.height > 300
   }
   
+  function cutLength(blade) {
+    return blade.height = dirt.height
+  }
+  
   console.log(blades[0].height)
   
   if (blades.every(maxLength)) {
     background(200, 19, 100)
     sun.show()
-    dirt.raining = false
+    raining = false
     dirt.show()
     lawnMower.show()
     for (const drop of drops) {
@@ -63,7 +71,7 @@ function draw() {
     for (const blade of blades) {
       blade.show()
     }
-  } else {
+  } else if (raining) {
     background(0, 0, 80)
     dirt.show()
     for (const cloud of clouds) {
@@ -196,12 +204,11 @@ class Dirt {
     this.y = 480
     this.height = 20
     this.width = width
-    this.raining = true
   }
   
   show() {
     noStroke()
-    if (this.raining) {
+    if (drop.raining) {
       fill('rgb(139,69,19)')
     } else {
       fill('rgb(210,180,140)')
@@ -241,6 +248,8 @@ class Grass {
       this.tri1y -= growSpeed
       this.tri2y -= growSpeed
       this.tri3y -= growSpeed
+    } else {
+      drop.raining = false
     }
   }
 }
@@ -297,6 +306,7 @@ class Mower {
   
   cut(blade) {
     blade.y = lawnMower.y + lawnMower.height - 10
+    blade.height = height - blade.y
     blade.tri1y = blade.y
     blade.tri2y = blade.y
     blade.tri3y = blade.y - blade.width
