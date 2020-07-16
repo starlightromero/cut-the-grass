@@ -26,8 +26,11 @@ function setup() {
   lawnMower = new Mower
   sun = new Sun
   
-  for(let i = 0; i < 3; i++) {
-    clouds[i] = new Cloud(rand)
+  for(let i = 0; i < 4; i++) {
+    let x = random(50, 450)
+    let y = random(30, 200)
+    let d = random(5, 50)
+    clouds[i] = new Cloud(x, y, d)
   }
 }
 
@@ -49,11 +52,11 @@ function draw() {
     // lawnMower.show()
   } else {
     background(0, 0, 80)
-    cloud.show()
-    cloud2.show()
+    for (const cloud of clouds) {
+      cloud.show()
+    }
     for (const drop of drops) {
-      drop.rain
-      ()
+      drop.rain()
       drop.show()
     }
     for (const blade of blades) {
