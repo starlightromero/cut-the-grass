@@ -1,7 +1,7 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height,
- *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collideRectCircle
+ *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle
  */
 
 let dropSound
@@ -82,11 +82,14 @@ class RainDrop {
       this.triX3 = this.x
       this.triY3 = this.y - this.diameter  
       // dropSound.play()
+      e.log(blades[0].x)
+        i++
+      }
       for (const blade of blades) {
-        console.log(blade.x)
-        if (collideRectCircle(blade.x, blade.y, blade.width, blade.height, this.dropX, this.dropY, this.diameter)) {
-          blade.grow()
-        }
+        
+        console.log(collidePointCircle(blade.x, blade.y, this.dropX, this.dropY, this.diameter))
+        
+  
       }
     }
   } 
