@@ -2,6 +2,7 @@
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, map
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
+ *    loadImage, image
  */
 
 let dropSound
@@ -15,7 +16,8 @@ let mowerRight
 
 
 function preload() {
-  mowerLeft = loadImage('assets/mower-left.png')
+  mowerLeft = loadImage('https://cdn.glitch.com/f4d46d84-c571-4140-b60d-740161a7e037%2Fmower-left.png?v=1594916808200')
+  mowerRight = loadImage('https://cdn.glitch.com/f4d46d84-c571-4140-b60d-740161a7e037%2Fmower-right.png?v=1594916817885')
 }
 
 function setup() {
@@ -36,7 +38,6 @@ function setup() {
   for(let i = 0; i < 4; i++) {
     clouds[i] = new Cloud
   }
-  
 }
 
 function draw() {
@@ -127,7 +128,8 @@ class Cloud {
 
 class RainDrop {
   constructor(diameter) {
-    this.x = random(50, 450)
+    console.log(this.x)
+    this.x = 
     console.log(this.y)
     this.y = random(30, 200)
     this.diameter = diameter
@@ -241,7 +243,6 @@ class Mower {
   }
   
   show() {
-    fill(0)
-    rect(this.x, this.y, this.width, this.height)
+    image(mowerRight, 0, 0)
   }
 }
