@@ -7,6 +7,7 @@
 let dropSound
 let blades = []
 let drops = []
+let lawnMower
 
 function setup() {
   createCanvas(500, 500);
@@ -20,6 +21,7 @@ function setup() {
     blades[i] = new Grass(random(width))
   }
   
+  lawnMower = new Mow
 }
 
 function draw() {
@@ -40,6 +42,27 @@ function draw() {
   for (const blade of blades) {
     blade.show()
   }
+  
+  lawnMower.showMower()
+}
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    lawnMower.mowerX -= 15
+  } else if (keyCode === RIGHT_ARROW) {
+    lawnMower.mowerX += 15
+  } else if (keyCode === DOWN_ARROW) {
+    lawnMower.mowerY += 15
+  } else if (keyCode === UP_ARROW) {
+    lawnMower.mowerY -= 15
+  }
+  
+  for (const blade of blades) {
+    let cutGrass = collidePointRect(blade.x, blade.y, this.mowerX, this.mowerY, this.mowerWidth, this.mowerHeight)
+    if (cutGrass) {
+      this.height -= this.mowerHeight
+    }
+  }  
 }
 
 // define Raindrop class 
@@ -130,34 +153,12 @@ class Mow {
   constructor() {
     this.mowerX = 0
     this.mowerY = 0
-    this.mowerWidth = 50
-    this.mowerHeight = 50
+    this.mowerWidth = 20
+    this.mowerHeight = 20
   }
   
   showMower () {
     fill(0)
-    rect(mowerX, mowerY, mowerWidth, mowerHeight)
+    rect(this.mowerX, this.mowerY, this.mowerWidth, this.mowerHeight)
   }
-    
-    mowLawn() {
-
-    
-    function keyPressed() {
-      if (keyCode === LEFT_ARROW) {
-        mowerX -= 5
-      } else if (keyCode === RIGHT_ARROW) {
-        mowerX += 5
-      } else if (keyCode === DOWN_ARROW) {
-        mowerY += 5
-      } else if (keyCode === UP_ARROW) {
-        mowerY -= 5
-      }
-    }
-    
-    for (const blade of blades) {
-      let cutGrass = collidePointRect(blade.x, blade.y, mowerX, mowerY, mowerWidth, mowerHeight)
-      if (cutGrass) {
-        this.height -= mowerHeight
-      }
-    }
 }
