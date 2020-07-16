@@ -54,6 +54,7 @@ function draw() {
     background(0, 0, 80)
     for (const cloud of clouds) {
       cloud.show()
+      cloud.move()
     }
     for (const drop of drops) {
       drop.rain()
@@ -199,6 +200,14 @@ class Cloud {
     ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
     ellipse(this.x, this.y+this.diameter, this.diameter)
     ellipse(this.x, this.y+this.diameter/2, this.diameter)
+  }
+  
+  move() {
+    if ((this.x-this.diameter/4*5) - this.diameter < width) {
+      this.x += 0.3
+    } else {
+      this.x = 0 - (this.x-this.diameter/4*5)
+    }
   }
 }
 
