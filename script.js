@@ -153,13 +153,14 @@ class Cloud {
 
 class RainDrop {
   constructor() {
-    // console.log(this.x)
-    this.x = random(clouds.map(function (this.diameter) {
-      
+    console.log(this.x)
+    this.x = random(clouds.map((cloud) => {
+        let result = cloud.x += cloud.speed
+        return result 
     }))
     // this.x = random(50, 450)
     // console.log(this.y)
-    this.y = random(30, 200)
+    this.y = random(clouds.y)
     this.diameter = random(3, 18)
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
@@ -194,8 +195,11 @@ class RainDrop {
   reset() {
     if (this.y > height) {
       // this.x = random(50, 450)
-      this.x = random(width)
-      this.y = random(30, 200)
+      this.x = random(clouds.map((cloud) => {
+        let result = cloud.x += cloud.speed
+        return result 
+    }))
+      this.y = random(clouds.y)
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
