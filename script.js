@@ -25,23 +25,24 @@ function setup() {
 }
 
 function draw() {
-
-  for (const blade of blades) {
-    blade.show()
-  }
-    
   function maxLength(blade) {
     return blade.growing === false
   }
     
-  if (blades.every(maxLength) {
-    background(147, 43, 92);
+  if (blades.every(maxLength)) {
+    background(200, 71, 73)
+    for (const blade of blades) {
+      blade.show()
+    }
     lawnMower.show()
   } else {
-    background(0, 0, 95)
+    background(200, 11, 100)
     for (const drop of drops) {
       drop.drip()
       drop.show()
+    }
+    for (const blade of blades) {
+      blade.show()
     }
   }
 }
