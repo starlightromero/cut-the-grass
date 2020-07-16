@@ -1,7 +1,7 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height,
- *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle
+ *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW
+ *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collidePointRect, keyCode, keyPressed
  */
 
 let dropSound
@@ -124,8 +124,40 @@ class Grass {
       this.tri3y -= this.growSpeed
     }
   }
-  
-  mowLawn() {
-    
+}
+
+class Mow {
+  constructor() {
+    this.mowerX = 0
+    this.mowerY = 0
+    this.mowerWidth = 50
+    this.mowerHeight = 50
   }
+  
+  showMower () {
+    fill(0)
+    rect(mowerX, mowerY, mowerWidth, mowerHeight)
+  }
+    
+    mowLawn() {
+
+    
+    function keyPressed() {
+      if (keyCode === LEFT_ARROW) {
+        mowerX -= 5
+      } else if (keyCode === RIGHT_ARROW) {
+        mowerX += 5
+      } else if (keyCode === DOWN_ARROW) {
+        mowerY += 5
+      } else if (keyCode === UP_ARROW) {
+        mowerY -= 5
+      }
+    }
+    
+    for (const blade of blades) {
+      let cutGrass = collidePointRect(blade.x, blade.y, mowerX, mowerY, mowerWidth, mowerHeight)
+      if (cutGrass) {
+        this.height -= mowerHeight
+      }
+    }
 }
