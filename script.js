@@ -47,14 +47,14 @@ function draw() {
 }
 
 function keyPressed() {
-  if (keyCode === LEFT_ARROW) {
-    lawnMower.x -= 15
-  } else if (keyCode === RIGHT_ARROW) {
-    lawnMower.x += 15
-  } else if (keyCode === DOWN_ARROW) {
-    lawnMower.y += 15
-  } else if (keyCode === UP_ARROW) {
-    lawnMower.y -= 15
+  if (keyCode === LEFT_ARROW && lawnMower.x > 0 + lawnMower.width) {
+    lawnMower.x -= 40
+  } else if (keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
+    lawnMower.x += 40
+  } else if (keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height) {
+    lawnMower.y += 40
+  } else if (keyCode === UP_ARROW && lawnMower.y > 0 + lawnMower.height) {
+    lawnMower.y -= 40
   }
   
   for (const blade of blades) {
@@ -99,7 +99,7 @@ class RainDrop {
     for (const blade of blades) {
       let hit = collidePointCircle(blade.x, blade.y, this.dropX, this.dropY, this.diameter)
       if (hit) {
-        blade.grow()
+        blade.grow(this.diameter)
       }
     }
     
@@ -122,7 +122,6 @@ class Grass {
     this.y = 500
     this.width = 5
     this.height = 0
-    this.growSpeed = 1.2 * drop.diameter
 //     triangle coordinates to sit atop rectangle
     this.tri1x = this.x 
     this.tri1y = this.y - this.height
@@ -140,12 +139,13 @@ class Grass {
     triangle(this.tri1x, this.tri1y, this.tri2x, this.tri2y, this.tri3x, this.tri3y)
   }
   
-  grow () {
+  grow (dropSize) {
     if (this.height > -300) {
-      this.height -= this.growSpeed
-      this.tri1y -= this.growSpeed
-      this.tri2y -= this.growSpeed
-      this.tri3y -= this.growSpeed
+      let growSpeed = dropSize/2
+      this.height -= growSpeed
+      this.tri1y -= growSpeed
+      this.tri2y -= growSpeed
+      this.tri3y -= growSpeed
     }
   }
 }
