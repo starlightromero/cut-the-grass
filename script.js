@@ -8,6 +8,8 @@ let dropSound
 let blades = []
 let drops = []
 let lawnMower
+let sun
+let cloud
 
 function setup() {
   createCanvas(500, 500);
@@ -22,6 +24,8 @@ function setup() {
   }
   
   lawnMower = new Mower
+  sun = new Sun
+  cloud = new Cloud
 }
 
 function draw() {
@@ -30,7 +34,8 @@ function draw() {
   }
     
   if (blades.every(maxLength)) {
-    background(200, 11, 100)
+    background(200, 19, 100)
+    sun.show()
     for (const drop of drops) {
       drop.drip()
       drop.show()
@@ -40,7 +45,8 @@ function draw() {
     }
     // lawnMower.show()
   } else {
-    background(60, 0, 100)
+    background(0, 0, 80)
+    cloud.show()
     for (const drop of drops) {
       drop.rain
       ()
@@ -167,18 +173,35 @@ class Grass {
   }
 }
 
+class Cloud {
+  constructor() {
+    this.x = 140
+    this.y = 70
+    this.diameter = 40
+  }
+  
+  show() {
+    noStroke()
+    fill(0, 0, 40)
+    ellipse(this.x, this.y, this.diameter)
+    ellipse(this.x+25, this.y+10, this.diameter)
+    ellipse(this.x+50, this.y+20, this.diameter)
+    ellipse(this.x-25, this.y+10, this.diameter)
+    ellipse(this.x-50, this.y+20, this.diameter)
+  }
+}
+
 class Sun {
   constructor() {
-    this.x = 300
-    this.y = 50
+    this.x = 400
+    this.y = 70
     this.diameter = 100
   }
   
   show() {
     noStroke()
-    fill(179, 79, 80)
-    ellipse(this.x, this.y, this.diameter)
-    
+    fill(60, 70, 100)
+    ellipse(this.x, this.y, this.diameter)  
   }
 }
 
