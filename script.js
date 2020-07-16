@@ -91,7 +91,7 @@ function keyPressed() {
 
 class RainDrop {
   constructor(diameter) {
-    this.x = random(width)
+    this.x = random(clouds)
     this.y = 0
     this.diameter = diameter
     this.fallSpeed = 0.8 * this.diameter
