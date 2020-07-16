@@ -1,7 +1,7 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height,
- *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle
+ *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collideRectCircle
  */
 
 let dropSound
@@ -46,8 +46,8 @@ function draw() {
 
 class RainDrop {
   constructor(diameter) {
-    this.x = random(width)
-    this.y = 0
+    this.dropX = random(width)
+    this.dropY = 0
     this.diameter = diameter
     this.fallSpeed = 0.8 * diameter
     this.triX1 = this.x - this.diameter/2
@@ -62,19 +62,19 @@ class RainDrop {
     //   Display droplets 
     noStroke()
     fill(179, 79, 80)
-    ellipse(this.x, this.y, this.diameter)
+    ellipse(this.dropX, this.dropY, this.diameter)
     triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)
   }
   
   drip() {
-    this.y += this.fallSpeed
+    this.dropY += this.fallSpeed
     this.triY1 += this.fallSpeed
     this.triY2 += this.fallSpeed
     this.triY3 += this.fallSpeed
     
-    if (this.y > height) {
-      this.y = 0
-      this.x = random(width)
+    if (this.dropY > height) {
+      this.dropY = 0
+      this.dropX = random(width)
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
@@ -83,16 +83,17 @@ class RainDrop {
       this.triY3 = this.y - this.diameter  
       // dropSound.play()
       for (const blade of blades) {
-        let hit = collideRectCircle(x1, y1, width1, height1, cx, cy, diameter)
-        blade.grow()
+        console.log(blade.x)
+        if (collideRectCircle(blade.x, blade.y, blade.width, blade.height, this.dropX, this.dropY, this.diameter)) {
+          blade.grow()
+        }
       }
-      
     }
   } 
 }
 
 class Grass {
-  constructor(x, y) {
+  constructor(x) {
     this.x = x
     this.y = 500
     this.width = 5
@@ -124,7 +125,7 @@ class Grass {
     }
   }
   
-  mowLawn () {
-    if ()
-  }
+  // mowLawn () {
+  //   if ()
+  // }
 }
