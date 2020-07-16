@@ -26,22 +26,20 @@ function setup() {
 
 function draw() {
   background(0, 0, 95);
-
-  // Move droplets
-
+  
   for (const drop of drops) {
     drop.drip()
-  }
- 
-//   display droplets
-  for (const drop of drops) {
     drop.show()
-  }
-  
-//   display grass
+
   for (const blade of blades) {
     blade.show()
   }
+    
+  function maxLength(blade) {
+    blade.length ===
+  }
+    
+  console.log(blades.every(maxLength))
   
   lawnMower.show()
 }
