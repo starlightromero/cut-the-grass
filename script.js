@@ -9,13 +9,13 @@ let blades = []
 let drops = []
 let lawnMower
 let sun
-let cloud
+let clouds = []
 
 function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 100, 100);
   // Variables for droplet 1
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 50; i++) {
     drops[i] = new RainDrop(random(3, 18))
   }
   
@@ -25,7 +25,10 @@ function setup() {
   
   lawnMower = new Mower
   sun = new Sun
-  cloud = new Cloud
+  
+  for(let i = 0; i < 3; i++) {
+    clouds[i] = new Cloud(rand)
+  }
 }
 
 function draw() {
@@ -47,6 +50,7 @@ function draw() {
   } else {
     background(0, 0, 80)
     cloud.show()
+    cloud2.show()
     for (const drop of drops) {
       drop.rain
       ()
@@ -174,20 +178,24 @@ class Grass {
 }
 
 class Cloud {
-  constructor() {
-    this.x = 140
-    this.y = 70
-    this.diameter = 40
+  constructor(x, y, d) {
+    this.x = x
+    this.y = y
+    this.diameter = d
   }
   
   show() {
     noStroke()
     fill(0, 0, 40)
     ellipse(this.x, this.y, this.diameter)
-    ellipse(this.x+25, this.y+10, this.diameter)
-    ellipse(this.x+50, this.y+20, this.diameter)
-    ellipse(this.x-25, this.y+10, this.diameter)
-    ellipse(this.x-50, this.y+20, this.diameter)
+    ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4, this.diameter)
+    ellipse(this.x+this.diameter/4*5, this.y+this.diameter/2, this.diameter)
+    ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4, this.diameter)
+    ellipse(this.x-this.diameter/4*5, this.y+this.diameter/2, this.diameter)
+    ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
+    ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
+    ellipse(this.x, this.y+this.diameter, this.diameter)
+    ellipse(this.x, this.y+this.diameter/2, this.diameter)
   }
 }
 
