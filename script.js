@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW
+ *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, map
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
  */
 
@@ -11,9 +11,6 @@ let lawnMower
 let sun
 let clouds = []
 
- for(let i = 0; i < 4; i++) {
-    clouds[i] = new Cloud
-  }
 
 function preload() {
   
@@ -33,6 +30,10 @@ function setup() {
   
   lawnMower = new Mower
   sun = new Sun
+  
+  for(let i = 0; i < 4; i++) {
+    clouds[i] = new Cloud
+  }
   
 }
 
@@ -89,12 +90,44 @@ function keyPressed() {
   }  
 }
 
+class Cloud {
+  constructor() {
+    this.x = random(50, 450)
+    this.y = random(30, 200)
+    this.diameter = random(5, 50)
+    this.speed = this.diameter * 0.01
+  }
+  
+  show() {
+    noStroke()
+    fill(0, 0, 40)
+    ellipse(this.x, this.y, this.diameter)
+    ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4, this.diameter)
+    ellipse(this.x+this.diameter/4*5, this.y+this.diameter/2, this.diameter)
+    ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4, this.diameter)
+    ellipse(this.x-this.diameter/4*5, this.y+this.diameter/2, this.diameter)
+    ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
+    ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
+    ellipse(this.x, this.y+this.diameter, this.diameter)
+    ellipse(this.x, this.y+this.diameter/2, this.diameter)
+  }
+  
+  move() {
+    if (this.x - (this.diameter/4*5 - this.diameter) < width) {
+      this.x += this.speed
+    } else {
+      this.x = 0 - this.diameter/4*5 - this.diameter
+    }
+  }
+}
+
 // define Raindrop class 
 
 class RainDrop {
   constructor(diameter) {
     this.x = random(width)
-    this.y = random()
+    console.log(this.y)
+    this.y = random(Cloud.diameter)
     this.diameter = diameter
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
@@ -129,7 +162,7 @@ class RainDrop {
   reset() {
     if (this.y > height) {
       this.x = random(width)
-      this.y = random(clouds)
+      this.y = random(Cloud.y)
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
@@ -182,36 +215,6 @@ class Grass {
   }
 }
 
-class Cloud {
-  constructor() {
-    this.x = random(50, 450)
-    this.y = random(30, 200)
-    this.diameter = random(5, 50)
-    this.speed = this.diameter * 0.01
-  }
-  
-  show() {
-    noStroke()
-    fill(0, 0, 40)
-    ellipse(this.x, this.y, this.diameter)
-    ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4, this.diameter)
-    ellipse(this.x+this.diameter/4*5, this.y+this.diameter/2, this.diameter)
-    ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4, this.diameter)
-    ellipse(this.x-this.diameter/4*5, this.y+this.diameter/2, this.diameter)
-    ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
-    ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
-    ellipse(this.x, this.y+this.diameter, this.diameter)
-    ellipse(this.x, this.y+this.diameter/2, this.diameter)
-  }
-  
-  move() {
-    if (this.x - (this.diameter/4*5 - this.diameter) < width) {
-      this.x += this.speed
-    } else {
-      this.x = 0 - this.diameter/4*5 - this.diameter
-    }
-  }
-}
 
 class Sun {
   constructor() {
