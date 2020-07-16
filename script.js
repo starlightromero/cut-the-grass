@@ -1,7 +1,7 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW
- *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collidePointRect, keyCode, keyPressed
+ *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
  */
 
 let dropSound
@@ -13,7 +13,7 @@ function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 100, 100);
   // Variables for droplet 1
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 40; i++) {
     drops[i] = new RainDrop(random(3, 18))
   }
   
@@ -48,17 +48,18 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
-    lawnMower.mowerX -= 15
+    lawnMower.x -= 15
   } else if (keyCode === RIGHT_ARROW) {
-    lawnMower.mowerX += 15
+    lawnMower.x += 15
   } else if (keyCode === DOWN_ARROW) {
-    lawnMower.mowerY += 15
+    lawnMower.y += 15
   } else if (keyCode === UP_ARROW) {
-    lawnMower.mowerY -= 15
+    lawnMower.y -= 15
   }
   
   for (const blade of blades) {
-    let cutGrass = collidePointRect(blade.x, blade.y, lawnMower.mowerX, lawnMower.mowerY, lawnMower.mowerWidth, lawnMower.mowerHeight)
+    console.log(collideRectRect(blade.x, blade.y, blade.width, blade.height, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height) )
+    let cutGrass = collideRectRect(blade.x, blade.y, blade.width, blade.height, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height) 
     if (cutGrass) {
       blade.height += lawnMower.mowerHeight
     }
@@ -121,7 +122,7 @@ class Grass {
     this.y = 500
     this.width = 5
     this.height = 0
-    this.growSpeed = 1.2 * this.width
+    this.growSpeed = 1.2 * drop.diameter
 //     triangle coordinates to sit atop rectangle
     this.tri1x = this.x 
     this.tri1y = this.y - this.height
@@ -151,14 +152,14 @@ class Grass {
 
 class Mow {
   constructor() {
-    this.mowerX = 0
-    this.mowerY = 0
-    this.mowerWidth = 20
-    this.mowerHeight = 20
+    this.x = 0
+    this.y = 0
+    this.width = 20
+    this.height = 20
   }
   
   showMower () {
     fill(0)
-    rect(this.mowerX, this.mowerY, this.mowerWidth, this.mowerHeight)
+    rect(this.x, this.y, this.width, this.height)
   }
 }
