@@ -51,6 +51,8 @@ function draw() {
   if (blades.every(maxLength)) {
     background(200, 19, 100)
     sun.show()
+    dirt.raining = false
+    dirt.show()
     for (const drop of drops) {
       drop.drip()
       drop.show()
@@ -82,7 +84,7 @@ function keyPressed() {
     lawnMower.left(20)
   } else if (keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
     lawnMower.right(20)
-  } else if (keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height) {
+  } else if (keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height - dirt.height) {
     lawnMower.down(20)
   } else if (keyCode === UP_ARROW && lawnMower.y > 0) {
     lawnMower.up(20)
@@ -90,9 +92,8 @@ function keyPressed() {
   
   for (const blade of blades) {
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height)
-    // console.log(cutGrass)
-    // let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height) || collidePointRect(blade.triX, blade.triY3, lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height)
-    if (cutGrass) {
+    console.log(cutGrass)
+    if (cutGrass && blade.height > dirt.height) {
       blade.height += lawnMower.height
       console.log(blade.height)
     }
@@ -135,7 +136,8 @@ class Cloud {
 class RainDrop {
   constructor(diameter) {
     // console.log(this.x)
-    this.x = random(50, 450)
+    this.x = random(width)
+    // this.x = random(50, 450)
     // console.log(this.y)
     this.y = random(30, 200)
     this.diameter = diameter
@@ -171,7 +173,8 @@ class RainDrop {
     
   reset() {
     if (this.y > height) {
-      this.x = random(50, 450)
+      // this.x = random(50, 450)
+      this.x = random(width)
       this.y = random(30, 200)
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
@@ -194,11 +197,16 @@ class Dirt {
     this.y = 480
     this.height = 20
     this.width = width
+    this.raining = true
   }
   
   show() {
     noStroke()
-    fill('rgb(181,91,0)')
+    if (this.raining) {
+      fill('rgb(139,69,19)')
+    } else {
+      fill('rgb(210,180,140)')
+    }
     rect(this.x, this.y, this.width, this.height)
   }
 }
