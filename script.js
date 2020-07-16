@@ -93,8 +93,7 @@ function keyPressed() {
   for (const blade of blades) {
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height)
     if (cutGrass && blade.height > dirt.height) {
-      blade.height -= lawnMower.height
-      blade.y
+      lawnMower.cut(blade)
     }
   }  
 }
@@ -296,5 +295,12 @@ class Mower {
   up(y) {
     this.y -= y
     this.show()
+  }
+  
+  cut(blade) {
+    blade.y = lawnMower.y + lawnMower.height - 10
+    blade.tri1x
+    balde.tri2y
+    
   }
 }
