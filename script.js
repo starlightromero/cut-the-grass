@@ -92,7 +92,8 @@ function keyPressed() {
   
   for (const blade of blades) {
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height)
-    console.log(cutGrass)
+    // console.log(cutGrass)
+    console.log(blade.y, blade.height)
     if (cutGrass && blade.height > dirt.height) {
       blade.height += lawnMower.height
       console.log(blade.height)
