@@ -87,11 +87,15 @@ function keyPressed() {
   }  
 }
 
-// define Raindrop class 
+// define Raindrop class
+
+
 
 class RainDrop {
   constructor(diameter) {
-    this.x = random(clouds)
+    this.x = random(clouds.map(function (cloud) {
+      cloud.left
+    }))
     this.y = 0
     this.diameter = diameter
     this.fallSpeed = 0.8 * this.diameter
@@ -186,6 +190,8 @@ class Cloud {
     this.x = x
     this.y = y
     this.diameter = d
+    this.left = this.x - this.diameter/4*5 - this.diameter
+    this.right = this.x + this.diameter/4*5 + this.diameter
   }
   
   show() {
@@ -203,7 +209,7 @@ class Cloud {
   }
   
   move() {
-    if ((this.x-this.diameter/4*5) - this.diameter < width) {
+    if (this.left < width) {
       this.x += 0.3
     } else {
       this.x = 0 - this.diameter/4*5 - this.diameter
