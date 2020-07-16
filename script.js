@@ -58,9 +58,9 @@ function keyPressed() {
   }
   
   for (const blade of blades) {
-    let cutGrass = collidePointRect(blade.x, blade.y, this.mowerX, this.mowerY, this.mowerWidth, this.mowerHeight)
+    let cutGrass = collidePointRect(blade.x, blade.y, lawnMower.mowerX, lawnMower.mowerY, lawnMower.mowerWidth, lawnMower.mowerHeight)
     if (cutGrass) {
-      this.height -= this.mowerHeight
+      blade.height += lawnMower.mowerHeight
     }
   }  
 }
