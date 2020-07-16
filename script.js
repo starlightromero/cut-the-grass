@@ -45,8 +45,10 @@ function setup() {
 
 function draw() {
   function maxLength(blade) {
-    return blade.growing === false
+    return blade.height > 300
   }
+  
+  console.log(blades[0].height)
   
   if (blades.every(maxLength)) {
     background(200, 19, 100)
@@ -214,7 +216,6 @@ class Grass {
     this.y = 500
     this.width = 3
     this.height = 0
-    this.growing = true
 //     triangle coordinates to sit atop rectangle
     this.tri1x = this.x
     this.tri1y = this.y
@@ -240,8 +241,6 @@ class Grass {
       this.tri1y -= growSpeed
       this.tri2y -= growSpeed
       this.tri3y -= growSpeed
-    } else {
-      this.growing = false
     }
   }
 }
