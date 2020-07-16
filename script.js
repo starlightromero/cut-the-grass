@@ -206,7 +206,7 @@ class Cloud {
     if ((this.x-this.diameter/4*5) - this.diameter < width) {
       this.x += 0.3
     } else {
-      this.x = 0 - (this.x-this.diameter/4*5)
+      this.x = 0 - this.diameter/4*5 - this.diameter
     }
   }
 }
