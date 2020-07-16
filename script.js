@@ -8,11 +8,13 @@
 let dropSound
 let blades = []
 let drops = []
-let lawnMower
-let sun
 let clouds = []
+let lawnMower
 let mowerLeft
 let mowerRight
+let sun
+let dirt
+
 
 
 function preload() {
@@ -33,6 +35,7 @@ function setup() {
   }
   
   lawnMower = new Mower
+  dirt = new Dirt
   sun = new Sun
   
   for(let i = 0; i < 4; i++) {
@@ -59,6 +62,7 @@ function draw() {
   } else {
     background(0, 0, 80)
     lawnMower.show()
+    dirt.show()
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
@@ -75,13 +79,13 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW && lawnMower.x > 0) {
-    lawnMower.left(30)
+    lawnMower.left(20)
   } else if (keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
-    lawnMower.right(30)
+    lawnMower.right(20)
   } else if (keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height) {
-    lawnMower.down(30)
+    lawnMower.down(20)
   } else if (keyCode === UP_ARROW && lawnMower.y > 0) {
-    lawnMower.up(30)
+    lawnMower.up(20)
   }
   
   for (const blade of blades) {
@@ -181,6 +185,21 @@ class RainDrop {
   rain() {
     this.drip()
     this.reset()
+  }
+}
+
+class Dirt {
+  constructor() {
+    this.x = 0
+    this.y = 480
+    this.height = 20
+    this.width = width
+  }
+  
+  show() {
+    noStroke()
+    fill('rgb(181,91,0)')
+    rect(this.x, this.y, this.width, this.height)
   }
 }
 
