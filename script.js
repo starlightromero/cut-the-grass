@@ -48,16 +48,6 @@ function setup() {
 }
 
 function draw() {
-  
-  function maxHeight(blade) {
-    return blade.height > 300
-  }
-  
-  
-  if (blades.every(maxHeight)) {
-    raining === false
-  }
-  
   if (raining) {
     background(0, 0, 80)
     dirt.show()
@@ -76,7 +66,6 @@ function draw() {
     background(200, 19, 100)
     sun.show()
     dirt.show()
-    lawnMower.reset()
     lawnMower.show()
     for (const drop of drops) {
       drop.drip()
@@ -178,10 +167,19 @@ class RainDrop {
     this.triY2 += this.fallSpeed
     this.triY3 += this.fallSpeed
     
-    for (const blade of blades) {
-      let hit = collidePointCircle(blade.x, blade.y, this.x, this.y, this.diameter)
-      if (hit) {
-        blade.grow(this.diameter)
+    function maxHeight(blade) {
+      return blade.height > 300
+    }
+    
+    if (blades.every(maxHeight)) {
+      raining = false
+      lawnMower.reset()
+    } else {
+      for (const blade of blades) {
+        let hit = collidePointCircle(blade.x, blade.y, this.x, this.y, this.diameter)
+        if (hit) {
+          blade.grow(this.diameter)
+        }
       }
     }
   }
@@ -256,8 +254,6 @@ class Grass {
       this.tri1y -= growSpeed
       this.tri2y -= growSpeed
       this.tri3y -= growSpeed
-    } else {
-      raining = false
     }
   }
 }
