@@ -25,25 +25,25 @@ function setup() {
 }
 
 function draw() {
-  background(0, 0, 95);
-  
-  for (const drop of drops) {
-    drop.drip()
-    drop.show()
-  }
 
   for (const blade of blades) {
     blade.show()
   }
     
   function maxLength(blade) {
-    blade.height < -299
-    console.log(blade.height)
+    return blade.growing === false
   }
     
-  console.log(blades.every(maxLength))
-  
-  lawnMower.show()
+  if (blades.every(maxLength) {
+    background(147, 43, 92);
+    lawnMower.show()
+  } else {
+    background(0, 0, 95)
+    for (const drop of drops) {
+      drop.drip()
+      drop.show()
+    }
+  }
 }
 
 function keyPressed() {
@@ -123,6 +123,7 @@ class Grass {
     this.y = 500
     this.width = 5
     this.height = 0
+    this.growing = true
 //     triangle coordinates to sit atop rectangle
     this.tri1x = this.x 
     this.tri1y = this.y - this.height
@@ -147,6 +148,8 @@ class Grass {
       this.tri1y -= growSpeed
       this.tri2y -= growSpeed
       this.tri3y -= growSpeed
+    } else {
+      this.growing = false
     }
   }
 }
