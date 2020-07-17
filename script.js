@@ -65,23 +65,21 @@ function draw() {
   if (raining) {
     background(0, 0, 80)
     // text(title, width/2, 10)
-    dirt.show()
-    
-    for (const cloud of clouds) {
-      cloud.show()
-      cloud.move()
-    }
     for (const drop of drops) {
       drop.rain()
       drop.show()
     }
+    for (const cloud of clouds) {
+      cloud.show()
+      cloud.move()
+    }
     for (const blade of blades) {
       blade.show()
     }
+    dirt.show()
   } else {
     background(200, 19, 100)
     sun.show()
-    dirt.show()
     lawnMower.show()
     for (const drop of drops) {
       drop.drip()
@@ -90,6 +88,7 @@ function draw() {
     for (const blade of blades) {
       blade.show()
     }
+    dirt.show()
   }
 }
 
