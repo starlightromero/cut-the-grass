@@ -9,7 +9,6 @@ let dropSound
 let blades = []
 let drops = []
 let clouds = []
-let cloudParticles = []
 let lawnMower
 let mowerLeft
 let mowerRight
@@ -36,10 +35,6 @@ function setup() {
   
   for(let i = 0; i < 4; i++) {
     clouds[i] = new Cloud
-  }
-  
-  for(let i = 0; i < 9; i++) {
-    cloudParticles[i] = new CloudParticle
   }
   
   for (let i = 0; i < 50; i++) {
@@ -75,9 +70,6 @@ function draw() {
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
-    }
-    for (const cloudParticle of cloudParticles) {
-      cloudParticle.show()
     }
     for (const drop of drops) {
       drop.rain()
@@ -132,44 +124,29 @@ class Cloud {
   constructor() {
     this.x = random(50, 450)
     this.y = random(30, 200)
-    console.log(this.y)
     this.diameter = random(5, 50)
     this.speed = this.diameter * 0.01
+    this.ellipse1x = this.x
+    this.ellipse1y = this.y
+    this.ellipse2x = this.x + this.diameter / 8*5
+    this.ellipse2y = this.y + this.diameter / 4
+    this.ellipse3x = this.x + this.diameter / 4*5
+    this.ellipse3y = this.y + this.diameter / 2
+    this.ellipse4x = this.x - this.diameter / 8*5
+    this.ellipse4y = this.y + this.diameter / 4
+    this.ellipse5x = this.x - this.diameter / 4*5
+    this.ellipse5y = this.y + this.diameter / 2
+    this.ellipse6x = this.x - this.diameter / 8*5
+    this.ellipse6y = this.y + this.diameter / 4*3
+    this.ellipse7x = this.x + this.diameter / 8*5
+    this.ellipse7y = this.y + this.diameter / 4*3
+    this.ellipse8x = this.x
+    this.ellipse8y = this.y + this.diameter
+    this.ellipse9x = this.x
+    this.ellipse9y = this.y + this.diameter/2
   }
   
-  move() {
-    if (this.x - (this.diameter/4*5 - this.diameter) < width) {
-      this.x += this.speed
-    } else {
-      this.x = 0 - this.diameter/4*5 - this.diameter
-    }
-  }
-}
-
-class CloudParticle extends Cloud {
-  constructor() {
-    super()
-    this.ellipse1x = Cloud.x
-    this.ellipse1y = Cloud.y
-    this.ellipse2x = Cloud.x + Cloud.diameter / 8*5
-    this.ellipse2y = Cloud.y + Cloud.diameter / 4
-    this.ellipse3x = Cloud.x + Cloud.diameter / 4*5
-    this.ellipse3y = Cloud.y + Cloud.diameter / 2
-    this.ellipse4x = Cloud.x - Cloud.diameter / 8*5
-    this.ellipse4y = Cloud.y + Cloud.diameter / 4
-    this.ellipse5x = Cloud.x - Cloud.diameter / 4*5
-    this.ellipse5y = Cloud.y + Cloud.diameter / 2
-    this.ellipse6x = Cloud.x - Cloud.diameter / 8*5
-    this.ellipse6y = Cloud.y + Cloud.diameter / 4*3
-    this.ellipse7x = Cloud.x + Cloud.diameter / 8*5
-    this.ellipse7y = Cloud.y + Cloud.diameter / 4*3
-    this.ellipse8x = Cloud.x
-    this.ellipse8y = Cloud.y + Cloud.diameter
-    this.ellipse9x = Cloud.x
-    this.ellipse9y = Cloud.y + this.diameter/2
-  }
-  
-    show() {
+   show() {
     noStroke()
     fill(0, 0, 40)
     ellipse(this.ellipse1x, this.ellipse1y, this.diameter)
@@ -182,7 +159,18 @@ class CloudParticle extends Cloud {
     ellipse(this.ellipse8x, this.ellipse8y, this.diameter)
     ellipse(this.ellipse9x, this.ellipse9y, this.diameter)
   }
+  
+  move() {
+    if (this.x - (this.diameter/4*5 - this.diameter) < width) {
+      this.x += this.speed
+    } else {
+      this.x = 0 - this.diameter/4*5 - this.diameter
+    }
+  }
 }
+ 
+   
+
 
 // define Raindrop class 
 
