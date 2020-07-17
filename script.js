@@ -2,7 +2,7 @@
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, map
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
- *    loadImage, image, loadFont, textAlign, CENTER, textFont, time, rotate
+ *    loadImage, image, loadFont, textAlign, CENTER, textFont, time, rotate, collideRectCircle
  */
 
 let dropSound
@@ -184,8 +184,8 @@ class Cloud {
     if (this.x - (this.diameter/4*5 - this.diameter) < width) {
       this.x += this.speed
       for (const cloudParticle of this.cloudParticles) {
-        cloudParticle.x
-        
+  
+        cloudParticle.x += this.speed  
       }
     } else {
       this.x = 0 - this.diameter/4*5 - this.diameter
@@ -236,7 +236,7 @@ class RainDrop {
     this.triY3 += this.fallSpeed
     
     for (const blade of blades) {
-      let hit = collidePointCircle(blade.x, blade.y, this.x, this.y, this.diameter)
+      let hit = collideRectCircle(blade.x, blade.y, blade.width, blade.height, this.x, this.y, this.diameter)
       if (hit) {
         blade.grow(this.diameter)
       }
@@ -308,7 +308,7 @@ class Display {
       this.title = "It's raining!"
       this.background = background(0, 0, 80)
     } else {
-      this.title = "Use the arrow keys to\ncut the grass!"
+      this.title = "Use the arrow keys\nto cut the grass!"
       this.background = background(200, 19, 100)
     }
   }
@@ -339,7 +339,7 @@ class Grass {
   
   grow(dropSize) {
     if (this.height < 300) {
-      let growSpeed = dropSize/2
+      let growSpeed = dropSize/20
       this.y -= growSpeed
       this.height += growSpeed
       this.tri1y -= growSpeed
