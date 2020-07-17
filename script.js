@@ -132,10 +132,10 @@ class Cloud {
   show() {
     noStroke()
     fill(0, 0, 40)
-    ellipse(this.x, this.y, this.diameter)
-    ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4, this.diameter)
-    ellipse(this.x+this.diameter/4*5, this.y+this.diameter/2, this.diameter)
-    ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4, this.diameter)
+    // ellipse(this.x, this.y, this.diameter)
+    // ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4, this.diameter)
+    // ellipse(this.x+this.diameter/4*5, this.y+this.diameter/2, this.diameter)
+    // ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4, this.diameter)
     ellipse(this.x-this.diameter/4*5, this.y+this.diameter/2, this.diameter)
     ellipse(this.x-this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
     ellipse(this.x+this.diameter/8*5, this.y+this.diameter/4*3, this.diameter)
@@ -152,7 +152,29 @@ class Cloud {
   }
 }
 
-class CloudParticle {
+class CloudParticle extends Cloud{
+  constructor() {
+    super()
+    this.ellipse1x = Cloud.x
+    this.ellipse1y = Cloud.y
+    this.ellipse2x = Cloud.x + Cloud.diameter / 8*5
+    this.ellipse2y = Cloud.y + Cloud.diameter / 4
+    this.ellipse3x = Cloud.x + Cloud.diameter / 4*5
+    this.ellipse3y = Cloud.y + Cloud.diameter / 2
+    this.ellipse4x = Cloud.x - Cloud.diameter / 8*5
+    this.ellipse4y = Cloud.y + Cloud.diameter / 4
+    this.ellipse5x = 
+    this.ellipse5y
+    this.ellipse6x
+    this.ellipse6y
+    this.ellipse7x
+    this.ellipse7y
+    this.ellipse8x
+    this.ellipse8y
+    this.ellipse9x
+    this.ellipse9y
+  }
+  
   
 }
 
