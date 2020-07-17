@@ -48,18 +48,19 @@ function setup() {
   
   raining = true
   
-  title = "It's raining!"
-  
   textFont(titleFont)
   textSize(width/15)
   textAlign(CENTER, CENTER)
+  
+  title = new Title
   
 }
 
 function draw() {
   if (raining) {
     background(0, 0, 80)
-    text(title.toUpperCase(), width/2, height/2)
+    title.show()
+    text(title.title(, width/2, height/2)
     for (const drop of drops) {
       drop.rain()
       drop.show()
@@ -75,6 +76,8 @@ function draw() {
     dirt.show()
   } else {
     background(200, 19, 100)
+    title.show()
+    text(title.title(), width/2, height/2)
     sun.show()
     for (const drop of drops) {
       drop.drip()
@@ -290,6 +293,20 @@ class Dirt {
       fill('rgb(146,104,41)')
     }
     rect(this.x, this.y, this.width, this.height)
+  }
+}
+
+class Title {
+  constructor() {
+    this.title = ""
+  }
+  
+  show() {
+    if (raining) {
+      this.title = "It's raining!"
+    } else {
+      this.title = "Use the arrow keys to\ncut the grass!"
+    }
   }
 }
 
