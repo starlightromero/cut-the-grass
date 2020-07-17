@@ -152,6 +152,10 @@ class Cloud {
   }
 }
 
+class CloudParticle {
+  
+}
+
 // define Raindrop class 
 
 class RainDrop {
