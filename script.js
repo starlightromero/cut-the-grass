@@ -159,8 +159,10 @@ class RainDrop {
         return result 
     }))
     // this.x = random(50, 450)
-    // console.log(this.y)
-    this.y = random(clouds.y)
+    console.log(this.y)
+    this.y = random(clouds.forEach((cloud) => {
+        return cloud.y
+      }))
     this.diameter = random(3, 18)
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
@@ -199,7 +201,9 @@ class RainDrop {
         let result = cloud.x += cloud.speed
         return result 
     }))
-      this.y = random(clouds.y)
+      this.y = random(clouds.forEach((cloud) => {
+        return cloud.y
+      }))
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
