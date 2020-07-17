@@ -12,8 +12,8 @@ let clouds = []
 let lawnMower
 let mowerLeft
 let mowerRight
-let sun
 let dirt
+let sun
 let raining
 let titleFont
 let display
@@ -184,7 +184,8 @@ class Cloud {
     if (this.x - (this.diameter/4*5 - this.diameter) < width) {
       this.x += this.speed
       for (const cloudParticle of this.cloudParticles) {
-        cloudParticle.x 
+        cloudParticle.x
+        
       }
     } else {
       this.x = 0 - this.diameter/4*5 - this.diameter
