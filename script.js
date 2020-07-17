@@ -2,7 +2,7 @@
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, map
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
- *    loadImage, image, loadFont, textAlign, CENTER, textFont
+ *    loadImage, image, loadFont, textAlign, CENTER, textFont, time
  */
 
 let dropSound
@@ -75,7 +75,6 @@ function draw() {
   } else {
     background(200, 19, 100)
     sun.show()
-    lawnMower.show()
     for (const drop of drops) {
       drop.drip()
       drop.show()
@@ -83,6 +82,7 @@ function draw() {
     for (const blade of blades) {
       blade.show()
     }
+    lawnMower.show()
     dirt.show()
   }
 }
@@ -120,18 +120,36 @@ class Cloud {
     this.y = random(30, 200)
     this.diameter = random(5, 50)
     this.speed = this.diameter * 0.01
-    this.ellipse1x = this.x
-    this.ellipse1y = this.y
-    this.ellipse2x = this.x + this.diameter / 8*5
-    this.ellipse2y = this.y + this.diameter / 4
-    this.ellipse3x = this.x + this.diameter / 4*5
-    this.ellipse3y = this.y + this.diameter / 2
-    this.ellipse4x = this.x - this.diameter / 8*5
-    this.ellipse4y = this.y + this.diameter / 4
-    this.ellipse5x = this.x - this.diameter / 4*5
-    this.ellipse5y = this.y + this.diameter / 2
-    this.ellipse6x = this.x - this.diameter / 8*5
-    this.ellipse6y = this.y + this.diameter / 4*3
+    this.ellipse1 = {
+      x: this.x,
+      y: this.y
+    }
+    this.ellipse2 = {
+      x: this.x + this.diameter / 8*5,
+      y: this.y + this.diameter / 4
+    }
+    this.ellipse3 = {
+      x: this.x + this.diameter / 4*5,
+      y: this.y + this.diameter / 2
+    }
+    this.ellipse4 = {
+      x: this.x - this.diameter / 8*5, 
+      y: this.y + this.diameter / 4 
+    }
+    this.ellipse5 = {
+      x: this.x - this.diameter / 4*5,
+      y: this.y + this.diameter / 2 
+    }
+    this.ellipse6 = {
+      x: this.x - this.diameter / 8*5,
+      y: this.y + this.diameter / 4*3
+    }
+    this.ellipse7 = {
+      x: this.x + this.diameter / 8*5, 
+      y: this.y + this.diameter / 4*3
+    }
+
+
     this.ellipse7x = this.x + this.diameter / 8*5
     this.ellipse7y = this.y + this.diameter / 4*3
     this.ellipse8x = this.x
@@ -143,7 +161,8 @@ class Cloud {
    show() {
     noStroke()
     fill(0, 0, 40)
-    ellipse(this.ellipse1x, this.ellipse1y, this.diameter)
+    // ellipse(this.ellipse1x, this.ellipse1y, this.diameter)
+    this.ellipse1
     ellipse(this.ellipse2x, this.ellipse2y, this.diameter)
     ellipse(this.ellipse3x, this.ellipse3y, this.diameter)
     ellipse(this.ellipse4x, this.ellipse4y, this.diameter)
