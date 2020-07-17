@@ -67,7 +67,7 @@ function draw() {
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
-      cloud.update()
+      // cloud.update()
     }
     for (const blade of blades) {
       blade.show()
@@ -181,7 +181,7 @@ class Cloud {
     if (this.x - (this.diameter/4*5 - this.diameter) < width) {
       this.x += this.speed
       for (const cloudParticle of this.cloudParticles) {
-        cloudParticle.x + (this.x += this.speed)
+        cloudParticle.x 
       }
     } else {
       this.x = 0 - this.diameter/4*5 - this.diameter
