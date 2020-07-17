@@ -16,7 +16,7 @@ let sun
 let dirt
 let raining
 let titleFont
-let title
+let display
 
 
 function preload() {
@@ -52,15 +52,16 @@ function setup() {
   textSize(width/15)
   textAlign(CENTER, CENTER)
   
-  title = new Title
+  display = new Display
   
 }
 
 function draw() {
+  
+  display.show()
+  display.background
+  
   if (raining) {
-    background(0, 0, 80)
-    title.show()
-    text(title.title(, width/2, height/2)
     for (const drop of drops) {
       drop.rain()
       drop.show()
@@ -73,11 +74,7 @@ function draw() {
     for (const blade of blades) {
       blade.show()
     }
-    dirt.show()
   } else {
-    background(200, 19, 100)
-    title.show()
-    text(title.title(), width/2, height/2)
     sun.show()
     for (const drop of drops) {
       drop.drip()
@@ -87,8 +84,11 @@ function draw() {
       blade.show()
     }
     lawnMower.show()
-    dirt.show()
   }
+
+  dirt.show()
+  text(display.title.toUpperCase(), width/2, height/2)
+  
 }
 
 function keyPressed() {
@@ -296,16 +296,19 @@ class Dirt {
   }
 }
 
-class Title {
+class Display {
   constructor() {
     this.title = ""
+    this.background
   }
   
   show() {
     if (raining) {
       this.title = "It's raining!"
+      this.background = background(0, 0, 80)
     } else {
       this.title = "Use the arrow keys to\ncut the grass!"
+      this.background = background(200, 19, 100)
     }
   }
 }
