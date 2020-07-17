@@ -67,6 +67,7 @@ function draw() {
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
+      cloud.update()
     }
     for (const blade of blades) {
       blade.show()
@@ -165,30 +166,30 @@ class Cloud {
     fill(0, 0, 40)
     // ellipse(this.ellipse1x, this.ellipse1y, this.diameter)
     ellipse(this.cloudParticles[0].x, this.cloudParticles[0].y, this.diameter)
-    ellipse(this.ellipse2.x, this.ellipse2.y, this.diameter)
-    ellipse(this.ellipse3.x, this.ellipse3.y, this.diameter)
-    ellipse(this.ellipse4.x, this.ellipse4.y, this.diameter)
-    ellipse(this.ellipse5.x, this.ellipse5.y, this.diameter)
-    ellipse(this.ellipse6.x, this.ellipse6.y, this.diameter)
-    ellipse(this.ellipse7.x, this.ellipse7.y, this.diameter)
-    ellipse(this.ellipse8.x, this.ellipse8.y, this.diameter)
-    ellipse(this.ellipse9.x, this.ellipse9.y, this.diameter)
+    ellipse(this.cloudParticles[1].x, this.cloudParticles[1].y, this.diameter)
+    ellipse(this.cloudParticles[2].x, this.cloudParticles[2].y, this.diameter)
+    ellipse(this.cloudParticles[3].x, this.cloudParticles[3].y, this.diameter)
+    ellipse(this.cloudParticles[4].x, this.cloudParticles[4].y, this.diameter)
+    ellipse(this.cloudParticles[5].x, this.cloudParticles[5].y, this.diameter)
+    ellipse(this.cloudParticles[6].x, this.cloudParticles[6].y, this.diameter)
+    ellipse(this.cloudParticles[7].x, this.cloudParticles[7].y, this.diameter)
+    ellipse(this.cloudParticles[8].x, this.cloudParticles[8].y, this.diameter)
   }
   
-  update() {
-    
-  }
   
   move() {
     if (this.x - (this.diameter/4*5 - this.diameter) < width) {
       this.x += this.speed
+      for (const cloudParticle of this.cloudParticles) {
+        cloudParticle.x + (this.x += this.speed)
+      }
     } else {
       this.x = 0 - this.diameter/4*5 - this.diameter
     }
   }
 }
- 
-   
+
+
 
 
 // define Raindrop class 
