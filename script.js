@@ -94,10 +94,12 @@ function draw() {
 function keyPressed() {
   if (raining === false && keyCode === LEFT_ARROW && lawnMower.x > 0) {
     lawnMower.left(20)
+    display.title = ""
   } else if (raining === false && keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
     lawnMower.right(20)
   } else if (raining === false && keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height - dirt.height) {
     lawnMower.down(20)
+    display.title = ""
   } else if (raining === false && keyCode === UP_ARROW && lawnMower.y > 0) {
     lawnMower.up(20)
   }
