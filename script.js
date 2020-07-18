@@ -60,6 +60,7 @@ function draw() {
   
   display.show()
   display.background
+  setTimeout(display.clear, 3000)
   
   if (raining) {
     for (const drop of drops) {
@@ -94,12 +95,10 @@ function draw() {
 function keyPressed() {
   if (raining === false && keyCode === LEFT_ARROW && lawnMower.x > 0) {
     lawnMower.left(20)
-    display.title = ""
   } else if (raining === false && keyCode === RIGHT_ARROW && lawnMower.x < width - lawnMower.width) {
     lawnMower.right(20)
   } else if (raining === false && keyCode === DOWN_ARROW && lawnMower.y < height - lawnMower.height - dirt.height) {
     lawnMower.down(20)
-    display.title = ""
   } else if (raining === false && keyCode === UP_ARROW && lawnMower.y > 0) {
     lawnMower.up(20)
   }
@@ -303,17 +302,21 @@ class Dirt {
 class Display {
   constructor() {
     this.title = ""
-    this.background
+    this.info = true
   }
   
   show() {
-    if (raining) {
+    if (raining && this.info) {
       this.title = "It's raining!"
       this.background = background(0, 0, 80)
-    } else {
+    } else if (!raining && this.info) {
       this.title = "Use the arrow keys\nto cut the grass!"
       this.background = background(200, 19, 100)
     }
+  }
+  
+  clear() {
+    this.info = false
   }
 }
 
