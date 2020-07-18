@@ -106,6 +106,7 @@ function keyPressed() {
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height)
     if (cutGrass && blade.height > dirt.height) {
       lawnMower.cut(blade)
+      lawnMower.shavings()
     }
     
     function allCut(blade) {
@@ -411,5 +412,11 @@ class Mower {
     blade.tri1y = blade.y
     blade.tri2y = blade.y
     blade.tri3y = blade.y - blade.width
+  }
+  
+  shavings() {
+    noStroke()
+    fill(0, 0, 95)
+    rect(this.x, this.y, 3, 8)
   }
 }
