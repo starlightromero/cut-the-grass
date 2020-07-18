@@ -60,7 +60,6 @@ function draw() {
   
   display.show()
   display.background
-  setTimeout(display.clear, 3000)
   
   if (raining) {
     for (const drop of drops) {
@@ -88,8 +87,10 @@ function draw() {
   }
 
   dirt.show()
-  text(display.title.toUpperCase(), width/2, height/2)
-  
+  if (display.info) {
+    text(display.title.toUpperCase(), width/2, height/2)
+  }
+  setTimeout(display.clear, 3000)
 }
 
 function keyPressed() {
@@ -306,10 +307,10 @@ class Display {
   }
   
   show() {
-    if (raining && this.info) {
+    if (raining) {
       this.title = "It's raining!"
       this.background = background(0, 0, 80)
-    } else if (!raining && this.info) {
+    } else if (!raining) {
       this.title = "Use the arrow keys\nto cut the grass!"
       this.background = background(200, 19, 100)
     }
@@ -317,6 +318,8 @@ class Display {
   
   clear() {
     this.info = false
+    this.title = ""
+    console.log("clear")
   }
 }
 
