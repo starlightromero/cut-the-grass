@@ -417,6 +417,7 @@ class Mower {
   shavings() {
     noStroke()
     fill(0, 0, 95)
-    rect(this.x, this.y, 3, 8)
+    rect(this.x-5, this.y-5, 3, 8)
+    console.log('shave')
   }
 }
