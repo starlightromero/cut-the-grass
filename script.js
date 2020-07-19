@@ -171,15 +171,18 @@ class Cloud {
     noStroke()
     fill(0, 0, 40)
     // ellipse(this.ellipse1x, this.ellipse1y, this.diameter)
-    ellipse(this.cloudParticles[0].x, this.cloudParticles[0].y, this.diameter)
-    ellipse(this.cloudParticles[1].x, this.cloudParticles[1].y, this.diameter)
-    ellipse(this.cloudParticles[2].x, this.cloudParticles[2].y, this.diameter)
-    ellipse(this.cloudParticles[3].x, this.cloudParticles[3].y, this.diameter)
-    ellipse(this.cloudParticles[4].x, this.cloudParticles[4].y, this.diameter)
-    ellipse(this.cloudParticles[5].x, this.cloudParticles[5].y, this.diameter)
-    ellipse(this.cloudParticles[6].x, this.cloudParticles[6].y, this.diameter)
-    ellipse(this.cloudParticles[7].x, this.cloudParticles[7].y, this.diameter)
-    ellipse(this.cloudParticles[8].x, this.cloudParticles[8].y, this.diameter)
+    // ellipse(this.cloudParticles[0].x, this.cloudParticles[0].y, this.diameter)
+    // ellipse(this.cloudParticles[1].x, this.cloudParticles[1].y, this.diameter)
+    // ellipse(this.cloudParticles[2].x, this.cloudParticles[2].y, this.diameter)
+    // ellipse(this.cloudParticles[3].x, this.cloudParticles[3].y, this.diameter)
+    // ellipse(this.cloudParticles[4].x, this.cloudParticles[4].y, this.diameter)
+    // ellipse(this.cloudParticles[5].x, this.cloudParticles[5].y, this.diameter)
+    // ellipse(this.cloudParticles[6].x, this.cloudParticles[6].y, this.diameter)
+    // ellipse(this.cloudParticles[7].x, this.cloudParticles[7].y, this.diameter)
+    // ellipse(this.cloudParticles[8].x, this.cloudParticles[8].y, this.diameter)
+    for (let i = 0; i < 10; i++) {
+      cloudParticle[i] = ellipse()
+    }
   }
   
   
