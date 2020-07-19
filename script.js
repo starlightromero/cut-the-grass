@@ -181,7 +181,7 @@ class Cloud {
     // ellipse(this.cloudParticles[7].x, this.cloudParticles[7].y, this.diameter)
     // ellipse(this.cloudParticles[8].x, this.cloudParticles[8].y, this.diameter)
     for (const cloudParticle of this.cloudParticles) {
-      ellipse(cloudParticle.x, this.cloudParticles[cloudParticle].y, this.diameter)
+      ellipse(cloudParticle.x, cloudParticle.y, this.diameter)
     }
   }
   
