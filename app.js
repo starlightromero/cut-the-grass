@@ -74,7 +74,10 @@ function draw() {
     for (const drop of drops) {
       drop.show()
       drop.rain()
-      drops.shift()
+      if (drop.y > height) {
+        const index = drops.indexOf(drop)
+        drops.splice(index, 1)
+      }
     }
     for (const blade of blades) {
       blade.show()
@@ -127,7 +130,7 @@ class Cloud {
     this.x = random(50, 450)
     this.y = random(30, 200)
     this.diameter = random(5, 50)
-    this.speed = this.diameter * 0.01
+    this.speed = this.diameter * 0.02
     this.cloudParticles = [
       {
         x: this.x,
@@ -201,10 +204,6 @@ class RainDrop {
     this.triY2 = this.y
     this.triX3 = this.x
     this.triY3 = this.y - this.diameter
-    this.initial = {
-      x: x,
-      y: y
-    }
   }
   
   show() {
@@ -242,9 +241,6 @@ class RainDrop {
       lawnMower.reset()
     } else {
       this.drip()
-      if (this.y > height) {
-        this.reset()
-      }
     }
   }
 }
