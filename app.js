@@ -34,6 +34,10 @@ function setup() {
     clouds[i] = new Cloud
   }
   
+  // let drop = new RainDrop(cloudParticle.x, cloudParticle.y, this.diameter)
+  // drop.show()
+  // drop.rain()
+  
   for(let i = 0; i < 45; i++) {
     blades[i] = new Grass()
   }
@@ -231,11 +235,6 @@ class RainDrop {
         blade.grow(this.diameter)
       }
     }
-  }
-    
-  reset() {
-    this.x = this.initial.x
-    this.y = this.initial.y
   }
   
   rain() {
