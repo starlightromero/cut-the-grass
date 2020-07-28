@@ -34,12 +34,6 @@ function setup() {
     clouds[i] = new Cloud
   }
   
-  // for (const cloud of clouds) {
-  //   for (const cloudParticle of cloud.cloudParticles) {
-  //     drops.push(new RainDrop(cloudParticle.x, cloudParticle.y, cloud.diameter))
-  //   }
-  // }
-  
   for(let i = 0; i < 45; i++) {
     blades[i] = new Grass()
   }
@@ -67,18 +61,18 @@ function draw() {
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
-      for (const cloudParticle of cloud.cloudParticles) {
-        drops.push(new RainDrop(cloudParticle.x, cloudParticle.y, cloud.diameter))
-      }
+      // for (const cloudParticle of cloud.cloudParticles) {
+      //   drops.push(new RainDrop(cloudParticle.x, cloudParticle.y, cloud.diameter))
+      // }
     }
-    for (const drop of drops) {
-      drop.show()
-      drop.rain()
-      if (drop.y > height) {
-        const index = drops.indexOf(drop)
-        drops.splice(index, 1)
-      }
-    }
+    // for (const drop of drops) {
+    //   drop.show()
+    //   drop.rain()
+    //   if (drop.y > height) {
+    //     const index = drops.indexOf(drop)
+    //     drops.splice(index, 1)
+    //   }
+    // }
     for (const blade of blades) {
       blade.show()
     }
@@ -184,7 +178,7 @@ class Cloud {
     if (this.x - (this.diameter/4*5 - this.diameter) < width) {
       this.x += this.speed
       for (const cloudParticle of this.cloudParticles) {
-        cloudParticle.x += this.speed  
+        cloudParticle.x += this.speed
       }
     } else {
       this.x = 0 - this.diameter/4*5 - this.diameter
