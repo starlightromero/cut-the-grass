@@ -2,8 +2,8 @@
 /* global
  *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, map
  *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
- *    loadImage, image, loadFont, textAlign, CENTER, textFont, time, rotate, collideRectCircle
- */
+ *    loadImage, image, loadFont, textAlign, CENTER, textFont, time, rotate, collideRectCircle, windowWidth, windowHeight
+*/
 
 let dropSound
 let blades = []
@@ -26,8 +26,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(500, 500);
-  colorMode(HSB, 100, 100);
+  createCanvas(windowWidth, windowHeight)
+  colorMode(HSB, 100, 100)
   // Variables for droplet 1
   
   for(let i = 0; i < 4; i++) {
@@ -164,13 +164,11 @@ class Cloud {
         x: this.x,
         y: this.y + this.diameter / 2
       }]
-    
   }
   
    show() {
     noStroke()
     fill(0, 0, 40)
-
     for (const cloudParticle of this.cloudParticles) {
       ellipse(cloudParticle.x, cloudParticle.y, this.diameter)
     }
@@ -181,7 +179,6 @@ class Cloud {
     if (this.x - (this.diameter/4*5 - this.diameter) < width) {
       this.x += this.speed
       for (const cloudParticle of this.cloudParticles) {
-  
         cloudParticle.x += this.speed  
       }
     } else {
@@ -190,25 +187,11 @@ class Cloud {
   }
 }
 
-
-
-
-// define Raindrop class 
-
 class RainDrop {
   constructor() {
+    this.x = random(clouds.map(cloud => cloud.x += cloud.speed))
     console.log(this.x)
-    this.x = random(clouds.map((cloud) => {
-        let result = cloud.x += cloud.speed
-        return result 
-    }))
-    // this.x = random(50, 450)
-    
-    this.y = random(clouds.map((cloud) => {
-      let result = cloud.y
-      // console.log(result)
-      return result
-    }))
+    this.y = random(clouds.map(cloud => cloud.y))
     this.diameter = random(3, 18)
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
@@ -275,25 +258,6 @@ class RainDrop {
   }
 }
 
-class Dirt {
-  constructor() {
-    this.x = 0
-    this.y = 480
-    this.height = 20
-    this.width = width
-  }
-  
-  show() {
-    noStroke()
-    if (raining) {
-      fill('rgb(70,46,34)')
-    } else {
-      fill('rgb(146,104,41)')
-    }
-    rect(this.x, this.y, this.width, this.height)
-  }
-}
-
 class Display {
   constructor() {
     this.title = ""
@@ -313,7 +277,6 @@ class Display {
   clear() {
     this.info = false
     this.title = ""
-    console.log("clear")
   }
 }
 
@@ -420,6 +383,5 @@ class Mower {
     noStroke()
     fill(0, 0, 95)
     rect(this.x-5, this.y-5, 3, 8)
-    console.log('shave')
   }
 }
