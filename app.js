@@ -29,10 +29,15 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight)
   colorMode(HSB, 100, 100)
-  // Variables for droplet 1
   
   for (let i = 0; i < 4; i++) {
     clouds[i] = new Cloud
+  }
+  
+  for (const cloud of clouds) {
+    for (const cloudParticle of cloud.cloudParticles) {
+      drops.push(new RainDrop(cloudParticle.x, cloudParticle.y, cloud.diameter))
+    }
   }
   
   for(let i = 0; i < 45; i++) {
@@ -62,9 +67,10 @@ function draw() {
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
-      for (const cloudParticle of cloud.cloudParticles) {
-        drops.push() = new RainDrop(cloudParticle.x, cloudParticle.y, cloud.diameter)
-      }
+    }
+    for (const drop of drops) {
+      drop.show()
+      drop.rain()
     }
     for (const blade of blades) {
       blade.show()
@@ -212,20 +218,12 @@ class RainDrop {
     }
   }
     
-  reset() {
-    if (this.y > height) {
-      this.x = random(clouds.map(cloud => cloud.x += cloud.speed))
-      this.y = random(clouds.map(cloud => cloud.y))
-      this.triX1 = this.x - this.diameter/2
-      this.triY1 = this.y
-      this.triX2 = this.x + this.diameter/2
-      this.triY2 = this.y 
-      this.triX3 = this.x
-      this.triY3 = this.y - this.diameter  
-    }
+  reset(x, y) {
+    this.x = x
+    this.y = y
   }
   
-  rain() {
+  rain(x, y) {
     function maxHeight(blade) {
       return blade.height > 300
     }
@@ -235,7 +233,9 @@ class RainDrop {
       lawnMower.reset()
     } else {
       this.drip()
-      this.reset()
+      if (this.y > height) {
+        this.reset(x, y)
+      }
     }
   }
 }
