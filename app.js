@@ -197,7 +197,7 @@ class RainDrop {
     this.x = x
     this.y = y
     this.diameter = d / 3
-    this.fallSpeed = 0.8 * this.diameter
+    this.fallSpeed = 2 * this.diameter
     this.triX1 = this.x - this.diameter/2
     this.triY1 = this.y
     this.triX2 = this.x + this.diameter/2
