@@ -31,13 +31,13 @@ function setup() {
   colorMode(HSB, 100, 100)
   // Variables for droplet 1
   
-  for(let i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
     clouds[i] = new Cloud
   }
   
-  for (let i = 0; i < 50; i++) {
-    drops[i] = new RainDrop()
-  }
+  // for (let i = 0; i < 50; i++) {
+  //   drops[i] = new RainDrop()
+  // }
   
   for(let i = 0; i < 45; i++) {
     blades[i] = new Grass()
@@ -63,24 +63,28 @@ function draw() {
   display.background
   
   if (raining) {
-    for (const drop of drops) {
-      drop.rain()
-      drop.show()
-    }
+    // for (const drop of drops) {
+    //   drop.rain()
+    //   drop.show()
+    // }
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
-      // cloud.update()
+      for (cloud.cloudParticle in cloud) {
+        let drop = new RainDrop(cloud.cloudParticle.x, cloud.cloudParticle.y)
+        drop.show()
+        drop.rain()
+      }
     }
     for (const blade of blades) {
       blade.show()
     }
   } else {
     sun.show()
-    for (const drop of drops) {
-      drop.drip()
-      drop.show()
-    }
+    // for (const drop of drops) {
+    //   drop.drip()
+    //   drop.show()
+    // }
     for (const blade of blades) {
       blade.show()
     }
@@ -189,10 +193,9 @@ class Cloud {
 }
 
 class RainDrop {
-  constructor() {
-    this.x = random(clouds.map(cloud => cloud.x += cloud.speed))
-    console.log(this.x)
-    this.y = random(clouds.map(cloud => cloud.y))
+  constructor(x, y) {
+    this.x = x
+    this.y = y
     this.diameter = random(3, 18)
     this.fallSpeed = 0.8 * this.diameter
     this.triX1 = this.x - this.diameter/2
@@ -225,7 +228,6 @@ class RainDrop {
     
   reset() {
     if (this.y > height) {
-      // this.x = random(50, 450)
       this.x = random(clouds.map(cloud => cloud.x += cloud.speed))
       this.y = random(clouds.map(cloud => cloud.y))
       this.triX1 = this.x - this.diameter/2
