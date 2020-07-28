@@ -1,13 +1,13 @@
 /*  global
-    width, noStroke, raining, fill, rect
+    width, noStroke, raining, fill, rect, height
 */
 
 class Dirt {
   constructor() {
-    this.x = 0
-    this.y = 480
     this.height = 20
     this.width = width
+    this.x = 0
+    this.y = height - this.height
   }
   
   show() {

@@ -1,8 +1,9 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
-/* global
- *    HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, map
- *    noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
- *    loadImage, image, loadFont, textAlign, CENTER, textFont, time, rotate, collideRectCircle, windowWidth, windowHeight
+/*  global
+ *  HSB, background, color, colorMode, createCanvas, ellipse, fill, height, LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, map
+ *  noStroke, random, strokeWeight, text, textSize, width, loadSound, rect, triangle, collidePointCircle, collideRectRect, collidePointRect, keyCode, keyPressed
+ *  loadImage, image, loadFont, textAlign, CENTER, textFont, time, rotate, collideRectCircle, windowWidth, windowHeight, Grass, Dirt, Mower, Sun
+ *  Display
 */
 
 let dropSound
@@ -203,7 +204,6 @@ class RainDrop {
   }
   
   show() {
-    //   Display droplets 
     noStroke()
     fill(179, 79, 80)
     let dropShape = ellipse(this.x, this.y, this.diameter) && triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)  
@@ -226,14 +226,8 @@ class RainDrop {
   reset() {
     if (this.y > height) {
       // this.x = random(50, 450)
-      this.x = random(clouds.map((cloud) => {
-        let result = cloud.x += cloud.speed
-        return result 
-      }))
-      this.y = random(clouds.map((cloud) => {
-        let result = cloud.y
-        return result
-      }))
+      this.x = random(clouds.map(cloud => cloud.x += cloud.speed))
+      this.y = random(clouds.map(cloud => cloud.y))
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
@@ -255,133 +249,5 @@ class RainDrop {
       this.drip()
       this.reset()
     }
-  }
-}
-
-class Display {
-  constructor() {
-    this.title = ""
-    this.info = true
-  }
-  
-  show() {
-    if (raining) {
-      this.title = "It's raining!"
-      this.background = background(0, 0, 80)
-    } else if (!raining) {
-      this.title = "Use the arrow keys\nto cut the grass!"
-      this.background = background(200, 19, 100)
-    }
-  }
-  
-  clear() {
-    this.info = false
-    this.title = ""
-  }
-}
-
-class Grass {
-  constructor() {
-    this.x = random(width)
-    this.y = 500
-    this.width = 8
-    this.height = 0
-//     triangle coordinates to sit atop rectangle
-    this.tri1x = this.x
-    this.tri1y = this.y
-    this.tri2x = this.x + this.width
-    this.tri2y = this.y
-    this.tri3x = this.x 
-    this.tri3y = this.y - this.width*2
-    
-  }
-  
-  show() {
-    noStroke() 
-    fill(131, 79, 80)
-    rect(this.x, this.y, this.width, this.height)
-    triangle(this.tri1x, this.tri1y, this.tri2x, this.tri2y, this.tri3x, this.tri3y)
-  }
-  
-  grow(dropSize) {
-    if (this.height < 300) {
-      let growSpeed = dropSize/20
-      this.y -= growSpeed
-      this.height += growSpeed
-      this.tri1y -= growSpeed
-      this.tri2y -= growSpeed
-      this.tri3y -= growSpeed
-    }
-  }
-}
-
-
-class Sun {
-  constructor() {
-    this.x = 400
-    this.y = 70
-    this.diameter = 100
-  }
-  
-  show() {
-    noStroke()
-    fill(60, 70, 100)
-    ellipse(this.x, this.y, this.diameter)  
-  }
-}
-
-class Mower {
-  constructor() {
-    this.x = 0
-    this.y = 0
-    this.width = 90
-    this.height = 90
-    this.img = mowerRight
-  }
-  
-  reset() {
-    this.x = 0
-    this.y = 0
-    this.img = mowerRight
-  }
-  
-  show() {
-    image(this.img, this.x, this.y, this.width, this.height)
-  }
-  
-  right(x) {
-    this.x += x
-    this.img = mowerRight
-    this.show()
-  }
-  
-  left(x) {
-    this.x -= x
-    this.img = mowerLeft
-    this.show()
-  }
-  
-  down(y) {
-    this.y += y
-    this.show()
-  }
-  
-  up(y) {
-    this.y -= y
-    this.show()
-  }
-  
-  cut(blade) {
-    blade.y = lawnMower.y + lawnMower.height - 10
-    blade.height = height - blade.y
-    blade.tri1y = blade.y
-    blade.tri2y = blade.y
-    blade.tri3y = blade.y - blade.width
-  }
-  
-  shavings() {
-    noStroke()
-    fill(0, 0, 95)
-    rect(this.x-5, this.y-5, 3, 8)
   }
 }
