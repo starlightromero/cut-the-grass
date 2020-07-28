@@ -173,15 +173,27 @@ class Cloud {
     }
   }
   
+  reset() {
+    this.x = 0 - this.diameter/4*5 - this.diameter
+    this.cloudParticles[0].x = this.x
+    this.cloudParticles[1].x = this.x + this.diameter / 8*5
+    this.cloudParticles[2].x = this.x + this.diameter / 4*5
+    this.cloudParticles[3].x = this.x - this.diameter / 8*5
+    this.cloudParticles[4].x = this.x - this.diameter / 4*5
+    this.cloudParticles[5].x = this.x - this.diameter / 8*5
+    this.cloudParticles[6].x = this.x + this.diameter / 8*5
+    this.cloudParticles[7].x = this.x
+    this.cloudParticles[8].x = this.x
+  }
   
   move() {
-    if (this.x - (this.diameter/4*5 - this.diameter) < width) {
+    if (this.x - this.diameter/ 4*5 - this.diameter < width) {
       this.x += this.speed
       for (const cloudParticle of this.cloudParticles) {
         cloudParticle.x += this.speed
       }
     } else {
-      this.x = 0 - this.diameter/4*5 - this.diameter
+      this.reset()
     }
   }
 }
