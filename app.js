@@ -160,7 +160,8 @@ class Cloud {
       {
         x: this.x,
         y: this.y + this.diameter / 2
-      }]
+      }
+    ]
   }
   
    show() {

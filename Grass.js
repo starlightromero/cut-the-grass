@@ -6,9 +6,8 @@ class Grass {
   constructor() {
     this.x = random(width)
     this.y = height
-    this.width = 8
+    this.width = 4
     this.height = 0
-//     triangle coordinates to sit atop rectangle
     this.tri1x = this.x
     this.tri1y = this.y
     this.tri2x = this.x + this.width
