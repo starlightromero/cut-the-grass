@@ -201,7 +201,7 @@ class RainDrop {
   show() {
     noStroke()
     fill(179, 79, 80)
-    let dropShape = ellipse(this.x, this.y, this.diameter) && triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)  
+    ellipse(this.x, this.y, this.diameter) && triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)  
   }
   
   drip() {
