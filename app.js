@@ -34,11 +34,11 @@ function setup() {
     clouds[i] = new Cloud
   }
   
-  for (const cloud of clouds) {
-    for (const cloudParticle of cloud.cloudParticles) {
-      drops.push(new RainDrop(cloudParticle.x, cloudParticle.y, cloud.diameter))
-    }
-  }
+  // for (const cloud of clouds) {
+  //   for (const cloudParticle of cloud.cloudParticles) {
+  //     drops.push(new RainDrop(cloudParticle.x, cloudParticle.y, cloud.diameter))
+  //   }
+  // }
   
   for(let i = 0; i < 45; i++) {
     blades[i] = new Grass()
@@ -67,10 +67,14 @@ function draw() {
     for (const cloud of clouds) {
       cloud.show()
       cloud.move()
+      for (const cloudParticle of cloud.cloudParticles) {
+        drops.push(new RainDrop(cloudParticle.x, cloudParticle.y, cloud.diameter))
+      }
     }
     for (const drop of drops) {
       drop.show()
       drop.rain()
+      drops.shift()
     }
     for (const blade of blades) {
       blade.show()
@@ -197,6 +201,10 @@ class RainDrop {
     this.triY2 = this.y
     this.triX3 = this.x
     this.triY3 = this.y - this.diameter
+    this.initial = {
+      x: x,
+      y: y
+    }
   }
   
   show() {
@@ -219,12 +227,12 @@ class RainDrop {
     }
   }
     
-  reset(x, y) {
-    this.x = x
-    this.y = y
+  reset() {
+    this.x = this.initial.x
+    this.y = this.initial.y
   }
   
-  rain(x, y) {
+  rain() {
     function maxHeight(blade) {
       return blade.height > 300
     }
@@ -235,7 +243,7 @@ class RainDrop {
     } else {
       this.drip()
       if (this.y > height) {
-        this.reset(x, y)
+        this.reset()
       }
     }
   }
