@@ -30,7 +30,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight)
   colorMode(HSB, 100, 100)
   
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 6; i++) {
     clouds[i] = new Cloud
   }
   
@@ -43,7 +43,7 @@ function setup() {
   
   dirt = new Dirt
   
-  for(let i = 0; i < 200; i++) {
+  for(let i = 0; i < 100; i++) {
     blades[i] = new Grass()
   }
   
@@ -66,21 +66,16 @@ function draw() {
   display.background
   
   if (raining) {
-    // if (drops.length < clouds.length * 20) {
-    //   for (const cloud of clouds) {
-    //     const chosenResult = random(cloud.cloudParticles)
-    //     drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
-    //   }
-    // }
+    if (drops.length < clouds.length * 40) {
+      for (const cloud of clouds) {
+        const chosenResult = random(cloud.cloudParticles)
+        drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
+      }
+    }
+    drops = drops.filter(drop => drop.y < height)
     for (const drop of drops) {
       drop.show()
       drop.rain()
-      if (drop.y > height - dirt.height) {
-        const index = drops.indexOf(drop)
-        drops.splice(index, 1)
-        drops.sort()
-        console.log(drops)
-      }
     }
     for (const cloud of clouds) {
       cloud.show()
@@ -134,9 +129,9 @@ function keyPressed() {
 
 class Cloud {
   constructor() {
-    this.x = random(50, 450)
+    this.x = random(0, width)
     this.y = random(30, 200)
-    this.diameter = random(5, 50)
+    this.diameter = random(10, 50)
     this.speed = this.diameter * 0.02
     this.cloudParticles = [
       {
@@ -238,29 +233,6 @@ class RainDrop {
     fill(179, 79, 80)
     ellipse(this.x, this.y, this.diameter) && triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)  
   }
-  
-  // reset() {
-  //   if (this.y > height) {
-  //     let result = []
-  //     for (const cloud of clouds) {
-  //       for (const cloudParticle of cloud.cloudParticles) {
-  //         result.push(cloudParticle)
-  //       }
-  //     }
-  //     const chosenResult = random(result)
-  //     console.log(chosenResult)
-  //     this.x = chosenResult.x
-  //     this.y = this.initaly
-  //     this.diameter = chosenResult.d / 3
-  //     this.fallSpeed = this.diameter
-  //     this.triX1 = this.x - this.diameter/2
-  //     this.triY1 = this.y
-  //     this.triX2 = this.x + this.diameter/2
-  //     this.triY2 = this.y 
-  //     this.triX3 = this.x
-  //     this.triY3 = this.y - this.diameter  
-  //   }
-  // }
   
   drip() {
     this.y += this.fallSpeed
