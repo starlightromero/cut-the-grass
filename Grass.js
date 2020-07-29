@@ -1,5 +1,5 @@
 /*  global
-    random, width, noStroke, fill, rect, triangle, height
+    random, width, noStroke, fill, rect, triangle, height, dirt
 */
 
 class Grass {
@@ -7,7 +7,7 @@ class Grass {
     this.x = random(width)
     this.y = height
     this.width = 4
-    this.height = 0
+    this.height = dirt.height
     this.tri1x = this.x
     this.tri1y = this.y
     this.tri2x = this.x + this.width

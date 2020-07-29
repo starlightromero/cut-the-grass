@@ -1,10 +1,10 @@
 /*  global
-    noStroke, fill, ellipse
+    noStroke, fill, ellipse, width
 */
 
 class Sun {
   constructor() {
-    this.x = 400
+    this.x = width / 10 * 9
     this.y = 70
     this.diameter = 100
   }

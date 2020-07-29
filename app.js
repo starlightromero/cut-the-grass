@@ -30,11 +30,11 @@ function setup() {
   createCanvas(windowWidth, windowHeight)
   colorMode(HSB, 100, 100)
   
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 8; i++) {
     clouds[i] = new Cloud
   }
   
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 20; i++) {
     for (const cloud of clouds) {
       const chosenResult = random(cloud.cloudParticles)
       drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
@@ -46,7 +46,6 @@ function setup() {
   }
   
   lawnMower = new Mower
-  dirt = new Dirt
   sun = new Sun
   
   raining = true
@@ -65,18 +64,17 @@ function draw() {
   display.background
   
   if (raining) {
+    if (drops.length < clouds.length * 20) {
+      for (const cloud of clouds) {
+        const chosenResult = random(cloud.cloudParticles)
+        drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
+      }
+    }
     for (const drop of drops) {
       drop.show()
       drop.rain()
-      if (drop.y < 0) {
-        const index = drops.indexOf(drop)
-        drops.splice(index, 1)
-      }
-      if (drops.length < clouds.length * 4) {
-        for (const cloud of clouds) {
-          const chosenResult = random(cloud.cloudParticles)
-          drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
-        }
+      if (drop.y > height) {
+        drops.shift()
       }
     }
     for (const cloud of clouds) {
