@@ -112,13 +112,13 @@ function keyPressed() {
   
   for (const blade of blades) {
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height)
-    if (cutGrass && blade.height > dirt.height) {
+    if (cutGrass && blade.height > 0) {
       lawnMower.cut(blade)
       lawnMower.shavings()
     }
     
     function allCut(blade) {
-      return blade.height === 0
+      return blade.height <= 0
     }
     
     if (blades.every(allCut)) {

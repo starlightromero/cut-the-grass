@@ -4,7 +4,7 @@
 
 class Dirt {
   constructor() {
-    this.height = 50
+    this.height = 60
     this.width = width
     this.x = 0
     this.y = height - this.height
