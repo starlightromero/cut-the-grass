@@ -1,5 +1,5 @@
 /*  global
-    mowerRight, image, mowerLeft, height, noStroke, fill, rect
+    mowerRight, image, mowerLeft, height, noStroke, fill, rect, dirt
 */
 
 class Mower {
@@ -44,8 +44,8 @@ class Mower {
   }
   
   cut(blade) {
-    if (blade.y > this.y + this.height - 10) {
-      blade.y = this.y + this.height - 10
+    if (blade.height > 0) {
+      blade.y = this.y + this.height - dirt.height
       blade.height = height - blade.y
       blade.tri1y = blade.y
       blade.tri2y = blade.y

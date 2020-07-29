@@ -92,7 +92,7 @@ function draw() {
     lawnMower.show()
   }
 
-  dirt.show()
+  // dirt.show()
   if (display.info) {
     text(display.title.toUpperCase(), width/2, height/2)
   }
