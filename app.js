@@ -72,6 +72,12 @@ function draw() {
         const index = drops.indexOf(drop)
         drops.splice(index, 1)
       }
+      if (drops.length < clouds.length * 4) {
+        for (const cloud of clouds) {
+          const chosenResult = random(cloud.cloudParticles)
+          drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
+        }
+      }
     }
     for (const cloud of clouds) {
       cloud.show()
