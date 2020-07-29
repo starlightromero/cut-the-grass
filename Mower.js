@@ -44,11 +44,13 @@ class Mower {
   }
   
   cut(blade) {
-    blade.y = this.y + this.height - 10
-    blade.height = height - blade.y
-    blade.tri1y = blade.y
-    blade.tri2y = blade.y
-    blade.tri3y = blade.y - blade.width
+    if (blade.y > this.y + this.height - 10) {
+      blade.y = this.y + this.height - 10
+      blade.height = height - blade.y
+      blade.tri1y = blade.y
+      blade.tri2y = blade.y
+      blade.tri3y = blade.y - blade.width
+    }
   }
   
   shavings() {

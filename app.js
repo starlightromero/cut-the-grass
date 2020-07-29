@@ -118,7 +118,7 @@ function keyPressed() {
     }
     
     function allCut(blade) {
-      return blade.height === dirt.height
+      return blade.height === 0
     }
     
     if (blades.every(allCut)) {

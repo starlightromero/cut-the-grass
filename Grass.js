@@ -5,8 +5,8 @@
 class Grass {
   constructor() {
     this.x = random(width)
-    this.y = 0
-    this.width = 4
+    this.y = height - dirt.height
+    this.width = 6
     this.height = 0
     this.tri1x = this.x
     this.tri1y = this.y
