@@ -41,7 +41,9 @@ function setup() {
     }
   }
   
-  for(let i = 0; i < 45; i++) {
+  dirt = new Dirt
+  
+  for(let i = 0; i < 200; i++) {
     blades[i] = new Grass()
   }
   
@@ -64,17 +66,20 @@ function draw() {
   display.background
   
   if (raining) {
-    if (drops.length < clouds.length * 20) {
-      for (const cloud of clouds) {
-        const chosenResult = random(cloud.cloudParticles)
-        drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
-      }
-    }
+    // if (drops.length < clouds.length * 20) {
+    //   for (const cloud of clouds) {
+    //     const chosenResult = random(cloud.cloudParticles)
+    //     drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
+    //   }
+    // }
     for (const drop of drops) {
       drop.show()
       drop.rain()
-      if (drop.y > height) {
-        drops.shift()
+      if (drop.y > height - dirt.height) {
+        const index = drops.indexOf(drop)
+        drops.splice(index, 1)
+        drops.sort()
+        console.log(drops)
       }
     }
     for (const cloud of clouds) {
@@ -234,28 +239,28 @@ class RainDrop {
     ellipse(this.x, this.y, this.diameter) && triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)  
   }
   
-  reset() {
-    if (this.y > height) {
-      let result = []
-      for (const cloud of clouds) {
-        for (const cloudParticle of cloud.cloudParticles) {
-          result.push(cloudParticle)
-        }
-      }
-      const chosenResult = random(result)
-      console.log(chosenResult)
-      this.x = chosenResult.x
-      this.y = this.initaly
-      this.diameter = chosenResult.d / 3
-      this.fallSpeed = this.diameter
-      this.triX1 = this.x - this.diameter/2
-      this.triY1 = this.y
-      this.triX2 = this.x + this.diameter/2
-      this.triY2 = this.y 
-      this.triX3 = this.x
-      this.triY3 = this.y - this.diameter  
-    }
-  }
+  // reset() {
+  //   if (this.y > height) {
+  //     let result = []
+  //     for (const cloud of clouds) {
+  //       for (const cloudParticle of cloud.cloudParticles) {
+  //         result.push(cloudParticle)
+  //       }
+  //     }
+  //     const chosenResult = random(result)
+  //     console.log(chosenResult)
+  //     this.x = chosenResult.x
+  //     this.y = this.initaly
+  //     this.diameter = chosenResult.d / 3
+  //     this.fallSpeed = this.diameter
+  //     this.triX1 = this.x - this.diameter/2
+  //     this.triY1 = this.y
+  //     this.triX2 = this.x + this.diameter/2
+  //     this.triY2 = this.y 
+  //     this.triX3 = this.x
+  //     this.triY3 = this.y - this.diameter  
+  //   }
+  // }
   
   drip() {
     this.y += this.fallSpeed
