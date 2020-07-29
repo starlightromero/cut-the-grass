@@ -34,8 +34,8 @@ function setup() {
     clouds[i] = new Cloud
   }
   
-  for (const cloud of clouds) {
-    for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
+    for (const cloud of clouds) {
       const chosenResult = random(cloud.cloudParticles)
       drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
     }
@@ -68,7 +68,7 @@ function draw() {
     for (const drop of drops) {
       drop.show()
       drop.rain()
-      if (drop.y > height) {
+      if (drop.y < 0) {
         const index = drops.indexOf(drop)
         drops.splice(index, 1)
       }
@@ -231,31 +231,25 @@ class RainDrop {
   }
   
   reset() {
-    // if (this.y > height) {
-    //   let result = []
-    //   for (const cloud of clouds) {
-    //     for (const cloudParticle of cloud.cloudParticles) {
-    //       result.push(cloudParticle)
-    //     }
-    //   }
-    //   const chosenResult = random(result)
-    //   console.log(chosenResult)
-    //   this.x = chosenResult.x
-    //   this.y = this.initaly
-    //   this.diameter = chosenResult.d / 3
-    //   this.fallSpeed = this.diameter
-    //   this.triX1 = this.x - this.diameter/2
-    //   this.triY1 = this.y
-    //   this.triX2 = this.x + this.diameter/2
-    //   this.triY2 = this.y 
-    //   this.triX3 = this.x
-    //   this.triY3 = this.y - this.diameter  
-    // }
-    for (const cloud of clouds) {
-      for (let i = 0; i < 4; i++) {
-        const chosenResult = random(cloud.cloudParticles)
-        drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
+    if (this.y > height) {
+      let result = []
+      for (const cloud of clouds) {
+        for (const cloudParticle of cloud.cloudParticles) {
+          result.push(cloudParticle)
+        }
       }
+      const chosenResult = random(result)
+      console.log(chosenResult)
+      this.x = chosenResult.x
+      this.y = this.initaly
+      this.diameter = chosenResult.d / 3
+      this.fallSpeed = this.diameter
+      this.triX1 = this.x - this.diameter/2
+      this.triY1 = this.y
+      this.triX2 = this.x + this.diameter/2
+      this.triY2 = this.y 
+      this.triX3 = this.x
+      this.triY3 = this.y - this.diameter  
     }
   }
   
@@ -283,7 +277,6 @@ class RainDrop {
       lawnMower.reset()
     } else {
       this.drip()
-      this.reset()
     }
   }
 }
