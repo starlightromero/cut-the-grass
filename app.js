@@ -35,24 +35,13 @@ function setup() {
   }
   
   for (const cloud of clouds) {
+    let result = []
     for (const cloudParticle of cloud.cloudParticles) {
-      let result = []
-      result.push(cloudParticle.x)
-      drops.push(new RainDrop(random(result), cloudParticle.y, cloud.diameter, cloud.speed))
-    }
-  }
-  
-  let result = []
-  for (const cloud of clouds) {
-    for (const cloudParticle of cloud.cloudParticles) {
-      let result = []
       result.push(cloudParticle)
-      
     }
+    const chosenResult = random(result)
+    drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
   }
-  const chosenResult = random(result)
-  this.x = chosenResult.x
-  this.y = chosenResult.y
   
   for(let i = 0; i < 45; i++) {
     blades[i] = new Grass()
@@ -145,31 +134,38 @@ class Cloud {
     this.cloudParticles = [
       {
         x: this.x,
-        y: this.y
+        y: this.y,
+        d: this.diameter
       },
       {
         x: this.x + this.diameter / 8*5,
-        y: this.y + this.diameter / 4
+        y: this.y + this.diameter / 4,
+        d: this.diameter
       },
       {
         x: this.x + this.diameter / 4*5,
-        y: this.y + this.diameter / 2
+        y: this.y + this.diameter / 2,
+        d: this.diameter
       },
       {
         x: this.x - this.diameter / 8*5, 
-        y: this.y + this.diameter / 4 
+        y: this.y + this.diameter / 4,
+        d: this.diameter
       },
       {
         x: this.x - this.diameter / 4*5,
-        y: this.y + this.diameter / 2 
+        y: this.y + this.diameter / 2,
+        d: this.diameter 
       },
       {
         x: this.x - this.diameter / 8*5,
-        y: this.y + this.diameter / 4*3
+        y: this.y + this.diameter / 4*3,
+        d: this.diameter
       },
       {
         x: this.x + this.diameter / 8*5, 
-        y: this.y + this.diameter / 4*3
+        y: this.y + this.diameter / 4*3,
+        d: this.diameter
       },
       {
         x: this.x, 
@@ -216,20 +212,17 @@ class Cloud {
 }
 
 class RainDrop {
-  constructor(x, y, d, s) {
+  constructor(x, y, d) {
     this.x = x
     this.y = y
     this.diameter = d / 3
-    this.fallSpeed = 2 * this.diameter
-    this.condensationRate = 1
+    this.fallSpeed = 1 * this.diameter
     this.triX1 = this.x - this.diameter/2
     this.triY1 = this.y
     this.triX2 = this.x + this.diameter/2
     this.triY2 = this.y
     this.triX3 = this.x
     this.triY3 = this.y - this.diameter
-    this.initialy = y
-    this.cloudSpeed = s
   }
   
   show() {
@@ -247,8 +240,11 @@ class RainDrop {
         }
       }
       const chosenResult = random(result)
+      console.log(chosenResult)
       this.x = chosenResult.x
-      this.y = chosenResult.y
+      this.y = this.inital.y
+      this.diameter = chosenResult.d / 3
+      this.fallSpeed = this.diameter
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
