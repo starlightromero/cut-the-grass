@@ -42,6 +42,18 @@ function setup() {
     }
   }
   
+  let result = []
+  for (const cloud of clouds) {
+    for (const cloudParticle of cloud.cloudParticles) {
+      let result = []
+      result.push(cloudParticle)
+      
+    }
+  }
+  const chosenResult = random(result)
+  this.x = chosenResult.x
+  this.y = chosenResult.y
+  
   for(let i = 0; i < 45; i++) {
     blades[i] = new Grass()
   }
@@ -66,10 +78,6 @@ function draw() {
   display.background
   
   if (raining) {
-    for (const cloud of clouds) {
-      cloud.show()
-      cloud.move()
-    }
     for (const drop of drops) {
       drop.show()
       drop.rain()
@@ -77,6 +85,10 @@ function draw() {
         const index = drops.indexOf(drop)
         drops.splice(index, 1)
       }
+    }
+    for (const cloud of clouds) {
+      cloud.show()
+      cloud.move()
     }
     for (const blade of blades) {
       blade.show()
@@ -228,11 +240,15 @@ class RainDrop {
   
   reset() {
     if (this.y > height) {
-      this.x = random(clouds.map((cloud) => {
-        let result = cloud.x += cloud.speed
-        return result 
-      }))
-      this.y = this.initialy
+      let result = []
+      for (const cloud of clouds) {
+        for (const cloudParticle of cloud.cloudParticles) {
+          result.push(cloudParticle)
+        }
+      }
+      const chosenResult = random(result)
+      this.x = chosenResult.x
+      this.y = chosenResult.y
       this.triX1 = this.x - this.diameter/2
       this.triY1 = this.y
       this.triX2 = this.x + this.diameter/2
