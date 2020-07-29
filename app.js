@@ -35,12 +35,10 @@ function setup() {
   }
   
   for (const cloud of clouds) {
-    let result = []
-    for (const cloudParticle of cloud.cloudParticles) {
-      result.push(cloudParticle)
+    for (let i = 0; i < 4; i++) {
+      const chosenResult = random(cloud.cloudParticles)
+      drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
     }
-    const chosenResult = random(result)
-    drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
   }
   
   for(let i = 0; i < 45; i++) {
@@ -223,6 +221,7 @@ class RainDrop {
     this.triY2 = this.y
     this.triX3 = this.x
     this.triY3 = this.y - this.diameter
+    this.initialy = y
   }
   
   show() {
@@ -232,25 +231,31 @@ class RainDrop {
   }
   
   reset() {
-    if (this.y > height) {
-      let result = []
-      for (const cloud of clouds) {
-        for (const cloudParticle of cloud.cloudParticles) {
-          result.push(cloudParticle)
-        }
+    // if (this.y > height) {
+    //   let result = []
+    //   for (const cloud of clouds) {
+    //     for (const cloudParticle of cloud.cloudParticles) {
+    //       result.push(cloudParticle)
+    //     }
+    //   }
+    //   const chosenResult = random(result)
+    //   console.log(chosenResult)
+    //   this.x = chosenResult.x
+    //   this.y = this.initaly
+    //   this.diameter = chosenResult.d / 3
+    //   this.fallSpeed = this.diameter
+    //   this.triX1 = this.x - this.diameter/2
+    //   this.triY1 = this.y
+    //   this.triX2 = this.x + this.diameter/2
+    //   this.triY2 = this.y 
+    //   this.triX3 = this.x
+    //   this.triY3 = this.y - this.diameter  
+    // }
+    for (const cloud of clouds) {
+      for (let i = 0; i < 4; i++) {
+        const chosenResult = random(cloud.cloudParticles)
+        drops.push(new RainDrop(chosenResult.x, chosenResult.y, chosenResult.d))
       }
-      const chosenResult = random(result)
-      console.log(chosenResult)
-      this.x = chosenResult.x
-      this.y = this.inital.y
-      this.diameter = chosenResult.d / 3
-      this.fallSpeed = this.diameter
-      this.triX1 = this.x - this.diameter/2
-      this.triY1 = this.y
-      this.triX2 = this.x + this.diameter/2
-      this.triY2 = this.y 
-      this.triX3 = this.x
-      this.triY3 = this.y - this.diameter  
     }
   }
   
