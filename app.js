@@ -38,7 +38,7 @@ function setup() {
     for (const cloudParticle of cloud.cloudParticles) {
       let result = []
       result.push(cloudParticle.x)
-      drops.push(new RainDrop(random(result), cloudParticle.y, cloud.diameter))
+      drops.push(new RainDrop(random(result), cloudParticle.y, cloud.diameter, cloud.speed))
     }
   }
   
@@ -204,7 +204,7 @@ class Cloud {
 }
 
 class RainDrop {
-  constructor(x, y, d) {
+  constructor(x, y, d, s) {
     this.x = x
     this.y = y
     this.diameter = d / 3
@@ -216,12 +216,30 @@ class RainDrop {
     this.triY2 = this.y
     this.triX3 = this.x
     this.triY3 = this.y - this.diameter
+    this.initialy = y
+    this.cloudSpeed = s
   }
   
   show() {
     noStroke()
     fill(179, 79, 80)
     ellipse(this.x, this.y, this.diameter) && triangle(this.triX1, this.triY1, this.triX2, this.triY2, this.triX3, this.triY3)  
+  }
+  
+  reset() {
+    if (this.y > height) {
+      this.x = random(clouds.map((cloud) => {
+        let result = cloud.x += cloud.speed
+        return result 
+      }))
+      this.y = this.initialy
+      this.triX1 = this.x - this.diameter/2
+      this.triY1 = this.y
+      this.triX2 = this.x + this.diameter/2
+      this.triY2 = this.y 
+      this.triX3 = this.x
+      this.triY3 = this.y - this.diameter  
+    }
   }
   
   drip() {
@@ -248,6 +266,7 @@ class RainDrop {
       lawnMower.reset()
     } else {
       this.drip()
+      this.reset()
     }
   }
 }
