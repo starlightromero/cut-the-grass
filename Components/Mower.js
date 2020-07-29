@@ -1,49 +1,49 @@
 /*  global
-    mowerRight, image, mowerLeft, height, noStroke, fill, rect, dirt
+    mowerRight, image, mowerLeft, height, dirt
 */
 
 class Mower {
-  constructor() {
+  constructor () {
     this.x = 0
     this.y = 0
     this.width = 90
     this.height = 90
     this.img = mowerRight
   }
-  
-  reset() {
+
+  reset () {
     this.x = 0
     this.y = 0
     this.img = mowerRight
   }
-  
-  show() {
+
+  show () {
     image(this.img, this.x, this.y, this.width, this.height)
   }
-  
-  right(x) {
+
+  right (x) {
     this.x += x
     this.img = mowerRight
     this.show()
   }
-  
-  left(x) {
+
+  left (x) {
     this.x -= x
     this.img = mowerLeft
     this.show()
   }
-  
-  down(y) {
+
+  down (y) {
     this.y += y
     this.show()
   }
-  
-  up(y) {
+
+  up (y) {
     this.y -= y
     this.show()
   }
-  
-  cut(blade) {
+
+  cut (blade) {
     blade.y = this.y + this.height - 5
     blade.height = height - blade.y - dirt.height
     blade.tri1y = blade.y

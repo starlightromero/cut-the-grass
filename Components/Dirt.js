@@ -3,14 +3,14 @@
 */
 
 class Dirt {
-  constructor() {
+  constructor () {
     this.height = 60
     this.width = width
     this.x = 0
     this.y = height - this.height
   }
-  
-  show() {
+
+  show () {
     noStroke()
     if (raining) {
       fill('rgb(70,46,34)')
