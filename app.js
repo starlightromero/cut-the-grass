@@ -92,7 +92,7 @@ function draw() {
     lawnMower.show()
   }
 
-  // dirt.show()
+  dirt.show()
   if (display.info) {
     text(display.title.toUpperCase(), width/2, height/2)
   }
@@ -114,7 +114,6 @@ function keyPressed() {
     let cutGrass = collideRectRect(lawnMower.x, lawnMower.y, lawnMower.width, lawnMower.height, blade.x, blade.y, blade.width, blade.height)
     if (cutGrass && blade.height > 0) {
       lawnMower.cut(blade)
-      lawnMower.shavings()
     }
     
     function allCut(blade) {

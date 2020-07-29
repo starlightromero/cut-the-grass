@@ -50,10 +50,4 @@ class Mower {
     blade.tri2y = blade.y
     blade.tri3y = blade.y - blade.width
   }
-  
-  shavings() {
-    // noStroke()
-    // fill(0, 0, 95)
-    // rect(this.x-5, this.y-5, 3, 8)
-  }
 }
